@@ -22,7 +22,7 @@ setuptools.setup(
     license=license,
     url="https://github.com/kkempfer/easylammps",
     packages=setuptools.find_packages(),
-    package_dir={"": "easylammps"},
+    package_dir={"easylammps": "easylammps"},
     install_requires=requirements,
     classifiers=[
         "Programming Language :: Python :: 3",
