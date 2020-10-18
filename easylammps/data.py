@@ -307,7 +307,7 @@ class Data(object):
 
     def add_improper_type(self, i=None, coeffs=None, style=None, comment=None):
         """
-        Add a improper type to the list.
+        Add an improper type to the list.
 
         Parameters
         ----------
@@ -1185,7 +1185,7 @@ class Data(object):
 
     def read_dihedral_coeffs_from_file(self, filename="dihedral.coeffs"):
         """
-        Read dihedral coefficients from a LAMMPS input file.
+        Read dihedral angle coefficients from a LAMMPS input file.
 
         Parameters
         ----------
@@ -1298,7 +1298,7 @@ class Data(object):
 
     def write_to_file(self, filename="lammps.data", is_coeffs=False):
         """
-        Write Data to a LAMMPS data file.
+        Write :class:`Data` to a LAMMPS data file.
 
         Parameters
         ----------
@@ -1813,7 +1813,7 @@ class Data(object):
 
     def to_networkx(self):
         """
-        Convert Data into a NetworkX Graph.
+        Convert :class:`Data` into a NetworkX Graph.
 
         Returns
         -------
@@ -2134,7 +2134,7 @@ class Data(object):
 
         Matches atom types of the four atoms composing the improper. Matches `coeffs`,
         `style` and `comment` (if available) of improper types. Atoms in improper are
-        reordered accordingly, but not the optionnal improper `comment` (if available).
+        reordered accordingly, but not the optionnal improper `comment`.
         """
         for improper_type in self.improper_types:
             if (
