@@ -141,5 +141,10 @@ class Log(object):
     def to_pandas(self):
         """
         Convert :class:`Log` into a pandas DataFrame.
+
+        Returns
+        -------
+        pandas.DataFrame
+            A pandas DataFrame.
         """
         return pd.DataFrame(list(self))

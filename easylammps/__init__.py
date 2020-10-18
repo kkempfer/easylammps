@@ -1,6 +1,7 @@
 from .log import Log
+from .data import Data
 
-__all__ = ["Log"]
+__all__ = ["Log", "Data"]
 
 # module level doc-string
 __doc__ = """
