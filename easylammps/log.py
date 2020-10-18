@@ -121,7 +121,7 @@ class Log(object):
 
     def seek_next_run(self):
         """
-        Seek to next run and set both `self.field` and `self.current_run`.
+        Seek to next run and set both `field` and `current_run` attributes.
         """
         for i, line in enumerate(self.f):
             if line.startswith("WARNING"):
