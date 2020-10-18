@@ -1,7 +1,7 @@
-from .log import Log
 from .data import Data
+from .log import Log
 
-__all__ = ["Log", "Data"]
+__all__ = ["Data", "Log"]
 
 # module level doc-string
 __doc__ = """
@@ -13,6 +13,7 @@ input and output files of LAMMPS [1]_ molecular dynamics code.
 
 Main features
 -------------
+  - A **LAMMPS Data class** to read, modify, and write LAMMPS data files.
   - **Memory efficient** reading of LAMMPS output files using iterators
     (over each configuration).
   - **Built-in conversion** into pandas DataFrame objects for quick
@@ -20,12 +21,15 @@ Main features
 
 Supported structures
 --------------------
-  - **LAMMPS Data** file, that contains the information about the system to
+  - **LAMMPS Data**, that contains the information about the system to
     study, simulation box size and shape, atomic coordinates, molecular
     topology, and optionnally force-field coefficients. Both reading and
-    writing are supported, allowing construction of a LAMMPS Data from scratch,
-    or modification of an existing one.
-  - **LAMMPS Log** file, where thermodynamic data has been printed. For now,
+    writing are supported, allowing construction of a LAMMPS Data from
+    scratch or modification of an existing one. Force-field coefficients
+    can be read from LAMMPS input files. These can then be written back in
+    a LAMMPS data file or in a LAMMPS input file to be used with LAMMPS
+    `include` command.
+  - **LAMMPS Log**, where thermodynamic data has been printed. For now,
     only one-line summary is supported (most common use case). For more
     information, see LAMMPS `thermo_style` and `thermo_modify` commands.
 

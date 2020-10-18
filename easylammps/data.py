@@ -18,7 +18,7 @@ def write_comment(f, d):
     Parameters
     ----------
     f : file object
-        LAMMPS Data file object.
+        LAMMPS data file object.
     d : dict
         May contain a comment value.
     """
@@ -65,7 +65,7 @@ class Data(object):
     Parameters
     ----------
     filename : str, optional
-        LAMMPS Data file.
+        LAMMPS data file.
     atom_style : str, default 'full'
         LAMMPS atom style.
 
@@ -129,6 +129,9 @@ class Data(object):
 
         self.header = None
 
+        self.box = [(None, None), (None, None), (None, None)]
+        self.tilt = [0, 0, 0]
+
         self.atom_types = []
         self.pair_types = []
         self.bond_types = []
@@ -141,9 +144,6 @@ class Data(object):
         self.angles = []
         self.dihedrals = []
         self.impropers = []
-
-        self.box = [(None, None), (None, None), (None, None)]
-        self.tilt = [0, 0, 0]
 
         self.filename = filename
 
@@ -548,22 +548,6 @@ class Data(object):
         """
         Remove holes (None).
         """
-
-        if None in self.atoms:
-            self.atoms = [atom for atom in self.atoms if atom is not None]
-        if None in self.bonds:
-            self.bonds = [bond for bond in self.bonds if bond is not None]
-        if None in self.angles:
-            self.angles = [angle for angle in self.angles if angle is not None]
-        if None in self.dihedrals:
-            self.dihedrals = [
-                dihedral for dihedral in self.dihedrals if dihedral is not None
-            ]
-        if None in self.impropers:
-            self.impropers = [
-                improper for improper in self.impropers if improper is not None
-            ]
-
         if None in self.atom_types:
             self.atom_types = [
                 atom_type for atom_type in self.atom_types if atom_type is not None
@@ -588,17 +572,30 @@ class Data(object):
                 for improper_type in self.improper_types
                 if improper_type is not None
             ]
+        if None in self.atoms:
+            self.atoms = [atom for atom in self.atoms if atom is not None]
+        if None in self.bonds:
+            self.bonds = [bond for bond in self.bonds if bond is not None]
+        if None in self.angles:
+            self.angles = [angle for angle in self.angles if angle is not None]
+        if None in self.dihedrals:
+            self.dihedrals = [
+                dihedral for dihedral in self.dihedrals if dihedral is not None
+            ]
+        if None in self.impropers:
+            self.impropers = [
+                improper for improper in self.impropers if improper is not None
+            ]
 
     def read_from_file(self, filename="lammps.data"):
         """
-        Constructor from LAMMPS Data file.
+        Constructor from LAMMPS data file.
 
         Parameters
         ----------
         filename : str, default 'lammps.data'
-            LAMMPS Data file.
+            LAMMPS data file.
         """
-
         nb_atoms = 0
         nb_bonds = 0
         nb_angles = 0
@@ -1002,8 +999,14 @@ class Data(object):
             raise ValueError("Number of improper types is not coherent")
 
     def read_pair_coeffs_from_file(self, filename="pair.coeffs"):
-        """Read pair coeffs from a LAMMPS Input file"""
+        """
+        Read pair coefficients from a LAMMPS input file.
 
+        Parameters
+        ----------
+        filename : str, default 'pair.coeffs'
+            LAMMPS input file.
+        """
         nb_atom_types = len(self.atom_types)
         self.pair_types = []
 
@@ -1061,8 +1064,14 @@ class Data(object):
         )
 
     def read_bond_coeffs_from_file(self, filename="bond.coeffs"):
-        """Read bond coeffs from a LAMMPS Input file"""
+        """
+        Read bond coefficients from a LAMMPS input file.
 
+        Parameters
+        ----------
+        filename : str, default 'bond.coeffs'
+            LAMMPS input file.
+        """
         nb_bond_types = len(self.bond_types)
         self.bond_types = []
 
@@ -1107,8 +1116,14 @@ class Data(object):
             ]
 
     def read_angle_coeffs_from_file(self, filename="angle.coeffs"):
-        """Read angle coeffs from a LAMMPS Input file"""
+        """
+        Read angle coefficients from a LAMMPS input file.
 
+        Parameters
+        ----------
+        filename : str, default 'angle.coeffs'
+            LAMMPS input file.
+        """
         nb_angle_types = len(self.angle_types)
         self.angle_types = []
 
@@ -1153,8 +1168,14 @@ class Data(object):
             ]
 
     def read_dihedral_coeffs_from_file(self, filename="dihedral.coeffs"):
-        """Read dihedral coeffs from a LAMMPS Input file"""
+        """
+        Read dihedral coefficients from a LAMMPS input file.
 
+        Parameters
+        ----------
+        filename : str, default 'dihedral.coeffs'
+            LAMMPS input file.
+        """
         nb_dihedral_types = len(self.dihedral_types)
         self.dihedral_types = []
 
@@ -1206,8 +1227,14 @@ class Data(object):
             ]
 
     def read_improper_coeffs_from_file(self, filename="improper.coeffs"):
-        """Read improper coeffs from a LAMMPS Input file"""
+        """
+        Read improper coefficients from a LAMMPS input file.
 
+        Parameters
+        ----------
+        filename : str, default 'improper.coeffs'
+            LAMMPS input file.
+        """
         nb_improper_types = len(self.improper_types)
         self.improper_types = []
 
@@ -1255,11 +1282,15 @@ class Data(object):
 
     def write_to_file(self, filename="lammps.data", is_coeffs=False):
         """
-        Write Data to a LAMMPS Data file.
-        If is_coeffs is True, include force field information.
+        Write Data to a LAMMPS data file.
 
+        Parameters
+        ----------
+        filename : str, default 'lammps.data'
+            LAMMPS data file.
+        is_coeffs : bool, default 'False'
+            Include force field information ?
         """
-
         f = open(filename, "w")
 
         # Header
@@ -1545,10 +1576,18 @@ class Data(object):
         f.close()
 
     def write_pair_coeffs_to_file(self, filename="pair.coeffs"):
-        """Write pair coeffs to a LAMMPS Input file"""
+        """
+        Write pair coefficients to a LAMMPS input file.
 
+        Parameters
+        ----------
+        filename : str, default 'pair.coeffs'
+            LAMMPS input file.
+        """
         if self.pair_types == []:
-            return logging.info("No pair type, no need to write pair coeffs file.")
+            return logging.info(
+                "No pair type, no need to write {:s} file.".format(filename)
+            )
 
         f = open(filename, "w")
 
@@ -1571,10 +1610,18 @@ class Data(object):
         f.close()
 
     def write_bond_coeffs_to_file(self, filename="bond.coeffs"):
-        """Write bond coeffs to a LAMMPS Input file"""
+        """
+        Write bond coefficients to a LAMMPS input file.
 
+        Parameters
+        ----------
+        filename : str, default 'bond.coeffs'
+            LAMMPS input file.
+        """
         if self.bond_types == []:
-            return logging.info("No bond type, no need to write bond coeffs file.")
+            return logging.info(
+                "No bond type, no need to write {:s} file.".format(filename)
+            )
 
         f = open(filename, "w")
 
@@ -1593,10 +1640,18 @@ class Data(object):
         f.close()
 
     def write_angle_coeffs_to_file(self, filename="angle.coeffs"):
-        """Write angle coeffs to a LAMMPS Input file"""
+        """
+        Write angle coefficients to a LAMMPS input file.
 
+        Parameters
+        ----------
+        filename : str, default 'angle.coeffs'
+            LAMMPS input file.
+        """
         if self.angle_types == []:
-            return logging.info("No angle type, no need to write angle coeffs file.")
+            return logging.info(
+                "No angle type, no need to write {:s} file.".format(filename)
+            )
 
         f = open(filename, "w")
 
@@ -1615,11 +1670,17 @@ class Data(object):
         f.close()
 
     def write_dihedral_coeffs_to_file(self, filename="dihedral.coeffs"):
-        """Write dihedral coeffs to a LAMMPS Input file"""
-
+        """
+        Write dihedral coefficients to a LAMMPS input file.
+        
+        Parameters
+        ----------
+        filename : str, default 'dihedral.coeffs'
+            LAMMPS input file.
+        """
         if self.dihedral_types == []:
             return logging.info(
-                "No dihedral type, no need to write dihedral coeffs file."
+                "No dihedral type, no need to write {:s} file.".format(filename)
             )
 
         f = open(filename, "w")
@@ -1639,11 +1700,17 @@ class Data(object):
         f.close()
 
     def write_improper_coeffs_to_file(self, filename="improper.coeffs"):
-        """Write improper coeffs to a LAMMPS Input file"""
+        """
+        Write improper coefficients to a LAMMPS input file.
 
+        Parameters
+        ----------
+        filename : str, default 'improper.coeffs'
+            LAMMPS input file.
+        """
         if self.improper_types == []:
             return logging.info(
-                "No improper type, no need to write improper coeffs file."
+                "No improper type, no need to write {:s} file.".format(filename)
             )
 
         f = open(filename, "w")
@@ -1662,22 +1729,28 @@ class Data(object):
 
         f.close()
 
-    def auto_comment_from_atom_types(self):
-        """Automatic comment by joining atom types comments"""
+    def auto_comment_from_atom_types(self, sep="-"):
+        """
+        Automatic comment by joining atom types comments.
 
-        for atom in self.atoms:
-            atom["comment"] = atom["atom_type"]["comment"]
+        Parameters
+        ----------
+        sep : str, default '-'
+            Separator used by `join()` method.
+        """
         for pair_type in self.pair_types:
-            pair_type["comment"] = "-".join(
+            pair_type["comment"] = sep.join(
                 (
                     pair_type["atom_type_1"]["comment"],
                     pair_type["atom_type_2"]["comment"],
                 )
             )
+        for atom in self.atoms:
+            atom["comment"] = atom["atom_type"]["comment"]
         for bond in self.bonds:
             atom1 = bond["atom1"]
             atom2 = bond["atom2"]
-            bond["comment"] = "-".join(
+            bond["comment"] = sep.join(
                 (atom1["atom_type"]["comment"], atom2["atom_type"]["comment"])
             )
             bond["bond_type"]["comment"] = bond["comment"]
@@ -1685,7 +1758,7 @@ class Data(object):
             atom1 = angle["atom1"]
             atom2 = angle["atom2"]
             atom3 = angle["atom3"]
-            angle["comment"] = "-".join(
+            angle["comment"] = sep.join(
                 (
                     atom1["atom_type"]["comment"],
                     atom2["atom_type"]["comment"],
@@ -1698,7 +1771,7 @@ class Data(object):
             atom2 = dihedral["atom2"]
             atom3 = dihedral["atom3"]
             atom4 = dihedral["atom4"]
-            dihedral["comment"] = "-".join(
+            dihedral["comment"] = sep.join(
                 (
                     atom1["atom_type"]["comment"],
                     atom2["atom_type"]["comment"],
@@ -1712,7 +1785,7 @@ class Data(object):
             atom2 = improper["atom2"]
             atom3 = improper["atom3"]
             atom4 = improper["atom4"]
-            improper["comment"] = "-".join(
+            improper["comment"] = sep.join(
                 (
                     atom1["atom_type"]["comment"],
                     atom2["atom_type"]["comment"],
@@ -1725,12 +1798,13 @@ class Data(object):
     def to_networkx(self):
         """
         Convert Data into a NetworkX Graph.
-        Nodes and edges correspond to the atom indices.
 
+        Returns
+        -------
+        networkx.Graph
+            Atoms are assigned as nodes. Bonds are assigned as edges.
         """
-
         G = nx.Graph()
-
         G.add_nodes_from([(atom["i"], atom) for atom in self.atoms])
         G.add_edges_from(
             [
@@ -1746,12 +1820,12 @@ class Data(object):
                 for bond in self.bonds
             ]
         )
-
         return G
 
     def reset_mol_i(self):
-        """Reset all molecule indices in atom list by checking bond topology"""
-
+        """
+        Reset all molecule indices in atoms list by checking bond topology.
+        """
         for atom in self.atoms:
             atom["mol_i"] = None
 
@@ -1769,12 +1843,11 @@ class Data(object):
 
     def reset_atom_types(self):
         """
-        Reset all atom types by matching mass and comment of atom types.
-        If defined, pair types are reset accordingly by matching atom types,
-        coeffs, style and comment of pair types.
+        Reset all atom types.
 
+        Matches `mass` and `comment` (if available) of atom types.
+        If not empty, pair types are updated accordingly.
         """
-
         self.atom_types = []
 
         for atom in self.atoms:
@@ -1842,11 +1915,15 @@ class Data(object):
 
     def reset_bond_types(self, match_atypes=True):
         """
-        Reset all bond types by matching atom types (if match_atypes is True),
-        coeffs, style and comment of bond types
+        Reset all bond types.
 
+        Matches `coeffs`, `style` and `comment` (if available) of bond types.
+
+        Parameters
+        ----------
+        match_atypes : bool, default 'True'
+            Match atom types of the two atoms composing the bond ?
         """
-
         self.bond_types = []
 
         for bond in self.bonds:
@@ -1901,11 +1978,15 @@ class Data(object):
 
     def reset_angle_types(self, match_atypes=True):
         """
-        Reset all angle types by matching atom types (if match_atypes is True),
-        coeffs, style and name of angle types
+        Reset all angle types.
 
+        Matches `coeffs`, `style` and `comment` (if available) of angle types.
+
+        Parameters
+        ----------
+        match_atypes : bool, default 'True'
+            Match atom types of the three atoms composing the angle ?
         """
-
         self.angle_types = []
 
         for angle in self.angles:
@@ -1964,11 +2045,15 @@ class Data(object):
 
     def reset_dihedral_types(self, match_atypes=True):
         """
-        Reset all dihedral types by matching atom types (if match_atypes is True),
-        coeffs, style and name of dihedral types
+        Reset all dihedral angle types.
 
+        Matches `coeffs`, `style` and `comment` (if available) of dihedral angle types.
+
+        Parameters
+        ----------
+        match_atypes : bool, default 'True'
+            Match atom types of the four atoms composing the dihedral angle ?
         """
-
         self.dihedral_types = []
 
         for dihedral in self.dihedrals:
@@ -2029,11 +2114,12 @@ class Data(object):
 
     def reset_improper_types(self):
         """
-        Reset all improper types by matching atom types, coeffs, style and comment of bond types.
-        Atoms in improper are reordered accordingly (but not its comment, if available).
+        Reset all improper types.
 
+        Matches atom types of the four atoms composing the improper. Matches `coeffs`,
+        `style` and `comment` (if available) of improper types. Atoms in improper are
+        reordered accordingly, but not the optionnal improper `comment` (if available).
         """
-
         for improper_type in self.improper_types:
             if (
                 improper_type["style"] == "distharm"
@@ -2158,8 +2244,14 @@ class Data(object):
             del improper_type["atom_types"]
 
     def reset_all_types(self, match_atypes=True):
-        """Reset all types"""
+        """
+        Reset all types.
 
+        Parameters
+        ----------
+        match_atypes : bool, default 'True'
+            Match atom types ?
+        """
         self.reset_atom_types()
         self.reset_bond_types(match_atypes=match_atypes)
         self.reset_angle_types(match_atypes=match_atypes)
