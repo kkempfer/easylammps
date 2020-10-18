@@ -13,7 +13,7 @@ class Log(object):
     LAMMPS Log file reader.
 
     Iterator over each configuration written in LAMMPS Log file. The latter
-    can directly be converted into a pandas DataFrame using `Log().to_pandas()`.
+    can directly be converted into a pandas DataFrame using `to_pandas()` method.
 
     Parameters
     ----------
@@ -145,6 +145,5 @@ class Log(object):
         Returns
         -------
         pandas.DataFrame
-            A pandas DataFrame.
         """
         return pd.DataFrame(list(self))
