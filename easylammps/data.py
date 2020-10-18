@@ -73,43 +73,36 @@ class Data(object):
     --------
     Load an existing LAMMPS Data from file:
 
-    >>> data = Data("data.spce")
+    >>> data = Data("data.ethanol")
 
-    Box size [(xlo, xhi), (ylo, yhi), (zlo, zhi)] and shape [xy, xz, yz]:
+    Box size and shape:
 
     >>> data.box
-    [(0.02645, 35.5328), (0.02645, 35.5328), (0.02641, 35.4736)]
+    [(-14.013845, 14.01693), (-14.027809, 14.01773), (-14.018882, 14.08573)]
     >>> data.tilt
     [0, 0, 0]
 
     List of atom, bond, angle, dihedral angle and improper types:
 
     >>> data.atom_types
-    [{'i': 1, 'mass': 15.9994}, {'i': 2, 'mass': 1.00794}]
-    >>> data.bond_types
-    [{'i': 1, 'coeffs': None, 'style': None}]
-    >>> data.angle_types
-    [{'i': 1, 'coeffs': None, 'style': None}]
-
-    Lists are empty if no type is defined:
-
-    >>> data.dihedral_types
-    []
-    >>> data.improper_types
-    []
+    [{'i': 1, 'mass': 11.611, 'comment': 'C3H'}, {'i': 2, 'mass': 11.611, 'comment': 'CTO'}, {'i': 3, 'mass': 1.008, 'comment': 'H'}, {'i': 4, 'mass': 15.599, 'comment': 'OH'}, {'i': 5, 'mass': 1.008, 'comment': 'HO'}, {'i': 6, 'mass': 0.4, 'comment': 'D_C3H'}, {'i': 7, 'mass': 0.4, 'comment': 'D_CTO'}, {'i': 8, 'mass': 0.4, 'comment': 'D_OH'}]
+    >>> data.bond_types[0]
+    {'i': 1, 'coeffs': [267.9907, 1.529], 'style': None, 'comment': 'C3H-CTO'}
+    >>> data.bond_types[-1]
+    {'i': 8, 'coeffs': [500.0, 0.0], 'style': None, 'comment': 'D_OH'}
 
     List of atoms, bonds, angles, dihedral angles and impropers. Nested dict-like structure:
 
+    >>> len(data.atoms)
+    3000
     >>> data.atoms[0]
-    {'i': 1, 'mol_i': 1, 'atom_type': {'i': 1, 'mass': 15.9994}, 'x': 12.12456, 'y': 28.09298, 'z': 22.27452, 'charge': -0.8472, 'nx': 0, 'ny': 1, 'nz': 0}
+    {'i': 1, 'mol_i': 1, 'atom_type': {'i': 1, 'mass': 11.611, 'comment': 'C3H'}, 'x': -11.46231, 'y': -1.613876, 'z': 11.15011, 'charge': -2.6652, 'comment': 'C3H'}
     >>> data.bonds[0]
-    {'i': 1, 'bond_type': {'i': 1, 'coeffs': None, 'style': None}, 'atom1': {'i': 1, 'mol_i': 1, 'atom_type': {'i': 1, 'mass': 15.9994}, 'x': 12.12456, 'y': 28.09298, 'z': 22.27452, 'charge': -0.8472, 'nx': 0, 'ny': 1, 'nz': 0}, 'atom2': {'i': 2, 'mol_i': 1, 'atom_type': {'i': 2, 'mass': 1.00794}, 'x': 12.53683, 'y': 28.75606, 'z': 22.89928, 'charge': 0.4236, 'nx': 0, 'ny': 1, 'nz': 0}}
-    >>> data.angles[0]
-    {'i': 1, 'angle_type': {'i': 1, 'coeffs': None, 'style': None}, 'atom1': {'i': 2, 'mol_i': 1, 'atom_type': {'i': 2, 'mass': 1.00794}, 'x': 12.53683, 'y': 28.75606, 'z': 22.89928, 'charge': 0.4236, 'nx': 0, 'ny': 1, 'nz': 0}, 'atom2': {'i': 1, 'mol_i': 1, 'atom_type': {'i': 1, 'mass': 15.9994}, 'x': 12.12456, 'y': 28.09298, 'z': 22.27452, 'charge': -0.8472, 'nx': 0, 'ny': 1, 'nz': 0}, 'atom3': {'i': 3, 'mol_i': 1, 'atom_type': {'i': 2, 'mass': 1.00794}, 'x': 11.49482, 'y': 28.5639, 'z': 21.65678, 'charge': 0.4236, 'nx': 0, 'ny': 1, 'nz': 0}}
+    {'i': 1, 'bond_type': {'i': 1, 'coeffs': [267.9907, 1.529], 'style': None, 'comment': 'C3H-CTO'}, 'atom1': {'i': 1, 'mol_i': 1, 'atom_type': {'i': 1, 'mass': 11.611, 'comment': 'C3H'}, 'x': -11.46231, 'y': -1.613876, 'z': 11.15011, 'charge': -2.6652, 'comment': 'C3H'}, 'atom2': {'i': 2, 'mol_i': 1, 'atom_type': {'i': 2, 'mass': 11.611, 'comment': 'CTO'}, 'x': -10.06198, 'y': -1.935158, 'z': 10.83904, 'charge': -1.7698, 'comment': 'CTO'}, 'comment': 'C3H-CTO'}
 
     Lists are empty if no structure is defined:
 
-    >>> data.dihedrals
+    >>> data.improper_types
     []
     >>> data.impropers
     []
@@ -117,6 +110,29 @@ class Data(object):
     Initialize an empty LAMMPS object:
 
     >>> data = Data()
+
+    Never add a new structure (atom, bond, atom type, *etc.*) manually. Instead, use the relevant method:
+
+    >>> data.add_atom_type(mass=11.611, comment="C")
+    >>> data.add_atom_type(mass=1.008, comment="H")
+    >>> data.atom_types
+    [{'i': 1, 'mass': 11.611, 'comment': 'C'}, {'i': 2, 'mass': 1.008, 'comment': 'H'}]
+    >>> data.add_atom(atom_type=data.atom_types[0], x=0.0, y=0.0, z=0.0)
+    >>> data.atoms[0]
+    {'i': 1, 'mol_i': None, 'atom_type': {'i': 1, 'mass': 11.611, 'comment': 'C'}, 'x': 0.0, 'y': 0.0, 'z': 0.0}
+    >>> data.add_atom(atom_type=data.atom_types[1], x=1.09, y=0.0, z=0.0)
+    >>> data.atoms[1]
+    {'i': 2, 'mol_i': None, 'atom_type': {'i': 2, 'mass': 1.008, 'comment': 'H'}, 'x': 1.09, 'y': 0.0, 'z': 0.0}
+
+    Molecule index can be inferred from the topology:
+
+    >>> data.reset_mol_i()
+    >>> data.atoms[0]["mol_i"], data.atoms[1]["mol_i"]
+    (1, 2)
+    >>> data.add_bond((1, 2))
+    >>> data.reset_mol_i()
+    >>> data.atoms[0]["mol_i"], data.atoms[1]["mol_i"]
+    (1, 1)
     """
 
     def __init__(self, filename=None, atom_style="full"):
