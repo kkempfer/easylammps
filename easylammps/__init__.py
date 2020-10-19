@@ -1,7 +1,8 @@
 from .data import Data
 from .log import Log
+from .avetime import AveTime
 
-__all__ = ["Data", "Log"]
+__all__ = ["Data", "Log", "AveTime"]
 
 # module level doc-string
 __doc__ = """
@@ -29,9 +30,11 @@ Supported structures
     can be read from LAMMPS input files. These can then be written back in
     a LAMMPS data file or in a LAMMPS input file to be used with LAMMPS
     `include` command.
-  - **LAMMPS Log**, where thermodynamic data has been printed. For now,
-    only one-line summary is supported (most common use case). For more
+  - **LAMMPS Log**, where thermodynamic data is printed. For now, only
+    one-line summary is supported (most common use case). For more
     information, see LAMMPS `thermo_style` and `thermo_modify` commands.
+  - **LAMMPS AveTime**, where result from LAMMPS `fix ave/time` command
+    is written.
 
 References
 ----------
