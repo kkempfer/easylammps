@@ -1,0 +1,24 @@
+{% extends "!layout.html" %}
+
+{% block footer %}
+  {{ super() }}
+  <style>
+
+    /* external link indicator */
+    footer a::after,
+    a.reference.external:not([href^="./"]):not([href^="#"])::after {
+      content: " \f35d";
+      font-family: "Font Awesome 5 Free";
+      display: inline-block;
+      text-rendering: auto;
+      font-weight: 900;
+      font-variant: normal;
+      font-size: x-small;
+      font-style: normal;
+      white-space: pre;
+      -webkit-font-smoothing: antialiased;
+    }
+
+  </style>
+{% endblock %}
+
