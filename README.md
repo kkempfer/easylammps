@@ -81,8 +81,6 @@ You should now be able to run LAMMPS from the command line and to import `lammps
     lmp_python
     python -c "import lammps"
 
-For a full description, please visit the official [LAMMPS](https://lammps.sandia.gov/doc/Manual.html) webpage.
-
 ---
 **NOTE**
 
