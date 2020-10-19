@@ -2,8 +2,9 @@ from .data import Data
 from .log import Log
 from .avetime import AveTime
 from .avechunk import AveChunk
+from .avehisto import AveHisto
 
-__all__ = ["Data", "Log", "AveTime", "AveChunk"]
+__all__ = ["Data", "Log", "AveTime", "AveChunk", "AveHisto"]
 
 # module level doc-string
 __doc__ = """
@@ -11,7 +12,8 @@ easylammps - a user-friendly LAMMPS analysis library for Python
 ===============================================================
 
 **easylammps** is a Python package providing structures to manipulate
-input and output files of LAMMPS [1]_ molecular dynamics code.
+input and output files of Large-scale Atomic/Molecular Massively Parallel
+Simulator (LAMMPS) molecular dynamics code [1]_.
 
 Main features
 -------------
@@ -38,8 +40,10 @@ Supported structures
     is written.
   - **LAMMPS AveChunk**, where result from LAMMPS `fix ave/chunk` command
     is written.
+  - **LAMMPS AveHisto**, where result from LAMMPS `fix ave/histo` command
+    is written.
 
 References
 ----------
-.. [1] LAMMPS official webpage https://lammps.sandia.gov
+  .. [1] LAMMPS official webpage https://lammps.sandia.gov
 """

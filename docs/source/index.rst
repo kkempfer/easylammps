@@ -1,13 +1,12 @@
-Welcome to EasyLAMMPS's documentation!
-======================================
+EasyLAMMPS's documentation
+==========================
 
 .. automodule:: easylammps
     :members:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
-
 
 
 Indices and tables
