@@ -97,7 +97,7 @@ Developments
 * Use of [black](https://black.readthedocs.io/) to auto-format Python code
 * Use of [sphinx](https://www.sphinx-doc.org/) to auto-build documentation based on Python docstrings
 * Add [pytest](https://docs.pytest.org/) (or equivalent)
-* Add Jupyter notebooks tutorials
+* Add [jupyter](https://jupyter.org/) notebooks tutorials
 * Add Input object to read LAMMPS input file ?
 * Add Restart object to read LAMMPS restart file ?
 
