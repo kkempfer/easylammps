@@ -12,7 +12,7 @@ class AveCorrelate(object):
     LAMMPS AveCorrelate file reader.
 
     Iterator over each correlation average written in LAMMPS AveCorrelate file, obtained
-    using `fix ave/correlate` or `fix ave/correlate/long` command. The latter can directly
+    using `fix ave/correlate` and `fix ave/correlate/long` commands. The latter can directly
     be converted into a pandas DataFrame using `to_pandas()` method.
 
 
