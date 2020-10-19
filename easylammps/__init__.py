@@ -1,8 +1,9 @@
 from .data import Data
 from .log import Log
 from .avetime import AveTime
+from .avechunk import AveChunk
 
-__all__ = ["Data", "Log", "AveTime"]
+__all__ = ["Data", "Log", "AveTime", "AveChunk"]
 
 # module level doc-string
 __doc__ = """
@@ -34,6 +35,8 @@ Supported structures
     one-line summary is supported (most common use case). For more
     information, see LAMMPS `thermo_style` and `thermo_modify` commands.
   - **LAMMPS AveTime**, where result from LAMMPS `fix ave/time` command
+    is written.
+  - **LAMMPS AveChunk**, where result from LAMMPS `fix ave/chunk` command
     is written.
 
 References
