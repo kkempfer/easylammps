@@ -42,39 +42,73 @@ Install LAMMPS as a shared library with Python
 
 Coupling [Python with LAMMPS]([https://lammps.sandia.gov/doc/Python_head.html) opens the door to many advanced extensions. Fortunately, the [`lammps`](https://lammps.sandia.gov/doc/Python_module.html) Python library already wraps the LAMMPS C-library interface. We propose here a quick installation guide.
 
-Use the virtual Python environment where `easylammps` is installed (recommended):
-
-    conda activate <env-name>
-
-Clone official LAMMPS repository (stable release):
+Clone the official LAMMPS repository (stable release):
 
     git clone https://github.com/lammps/lammps.git
     cd lammps
     git checkout stable
     git pull
 
-Build LAMMPS as a shared library with Python:
+Install `python3.8-dev` package:
 
-    mkdir build; cd build
+    sudo apt-get install python3.8-dev
+
+Use the virtual Python environment where `easylammps` is installed (recommended):
+
+    conda activate <env-name>
+
+Prepare the building directory and run `cmake` with at least these options:
+
+    mkdir build-python; cd build-python
     cmake -D PKG_PYTHON=ON
           -D BUILD_LIB=ON
           -D BUILD_SHARED_LIBS=ON
-          -D CMAKE_INSTALL_PREFIX=<anaconda3-path>/envs/<env-name>
-          -D LAMMPS_MACHINE=python
+          -D CMAKE_INSTALL_PREFIX=$CONDA_PREFIX
           -D LAMMPS_EXCEPTIONS=ON
           ../cmake
-    make
-    make install
 
-NB: Some useful additional options to add in cmake:
+More options to add in `cmake` are available [here](https://lammps.sandia.gov/doc/Build.html).
+Among them, some useful ones I use:
 
+    -D LAMMPS_MACHINE=python # Suffix to append to lmp binary
     -D PKG_MOLECULE=ON  # Model molecular systems with fixed covalent bonds
     -D PKG_RIGID=ON     # Rigid constraints on collections of atoms or particles
     -D PKG_KSPACE=ON    # Long-range electrostatic interaction
 
-Finally, add the library path which contains the installed liblammps.so to LD_LIBRARY_PATH:
+Once ready, build LAMMPS as a shared library with Python:
 
-    export LD_LIBRARY_PATH="<anaconda3-path>/envs/<env-name>/lib:$LD_LIBRARY_PATH"  
+    make
+    make install
+
+Finally, we need to add the library path which contains the installed `liblammps.so` to LD_LIBRARY_PATH, but only when our virtual Python environment `<env-name>` is active. Anaconda provides a way to [manage environment variables](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#saving-environment-variables). On Linux, the procedure is described below.
+
+Enter to the conda environment directory and create these subdirectories and files:
+
+    cd $CONDA_PREFIX
+    mkdir -p ./etc/conda/activate.d
+    mkdir -p ./etc/conda/deactivate.d
+    touch ./etc/conda/activate.d/env_vars.sh
+    touch ./etc/conda/deactivate.d/env_vars.sh
+
+Edit `./etc/conda/activate.d/env_vars.sh` as follows:
+
+    #!/bin/sh
+
+    export LD_LIBRARY_PATH="$CONDA_PREFIX/lib:$LD_LIBRARY_PATH"
+
+Edit `./etc/conda/deactivate.d/env_vars.sh` as follows:
+
+    #!/bin/sh
+
+    # The first, third and fourth lines are there to arrange for
+    # every component of the search path to be surrounded by `:`,
+    # to avoid special-casing the first and last component. The
+    # second line removes the specified component.
+
+    LD_LIBRARY_PATH=:$LD_LIBRARY_PATH:
+    LD_LIBRARY_PATH=${LD_LIBRARY_PATH//:$CONDA_PREFIX\/lib:/:}
+    LD_LIBRARY_PATH=${LD_LIBRARY_PATH#:}
+    LD_LIBRARY_PATH=${LD_LIBRARY_PATH%:}
 
 You should now be able to run LAMMPS from the command line and to import `lammps` module within Python:
 
