@@ -60,7 +60,7 @@ Prepare the building directory and run `cmake` with at least these options:
           -D BUILD_LIB=ON
           -D BUILD_SHARED_LIBS=ON
           -D CMAKE_INSTALL_PREFIX=$CONDA_PREFIX
-          -D PYTHON_EXECUTABLE=$CONDA_PREFIX/bin/python \
+          -D PYTHON_EXECUTABLE=$CONDA_PREFIX/bin/python
           -D LAMMPS_EXCEPTIONS=ON
           ../cmake
 
