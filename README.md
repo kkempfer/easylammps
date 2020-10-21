@@ -48,10 +48,6 @@ Clone the official LAMMPS repository (stable release):
     git checkout stable
     git pull
 
-Install `python3-dev` package:
-
-    sudo apt-get install python3-dev
-
 Use the virtual Python environment where `easylammps` is installed (recommended):
 
     conda activate <env-name>
