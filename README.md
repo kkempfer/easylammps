@@ -19,8 +19,7 @@ Create and activate a virtual Python environment (recommended), for example usin
 
 Install `easylammps` and its dependencies:
 
-    cd easylammps
-    python setup.py install --user
+    pip install ./easylammps
 
 
 Dependencies
@@ -40,7 +39,7 @@ Coming soon!
 Install LAMMPS as a shared library with Python (optional)
 ---------------------------------------------------------
 
-Coupling [Python with LAMMPS]([https://lammps.sandia.gov/doc/Python_head.html) opens the door to many advanced extensions. Fortunately, the [`lammps`](https://lammps.sandia.gov/doc/Python_module.html) Python library already wraps the LAMMPS C-library interface. We propose here a quick installation guide.
+Coupling [Python with LAMMPS]([https://lammps.sandia.gov/doc/Python_head.html) opens the door to many advanced extensions. Fortunately, the [`lammps`](https://lammps.sandia.gov/doc/Python_module.html) Python library already wraps the LAMMPS C-library interface. Here, we propose a quick installation guide.
 
 Clone the official LAMMPS repository (stable release):
 
@@ -49,33 +48,30 @@ Clone the official LAMMPS repository (stable release):
     git checkout stable
     git pull
 
-Install `python3-dev` package:
-
-    sudo apt-get install python3-dev
-
 Use the virtual Python environment where `easylammps` is installed (recommended):
 
     conda activate <env-name>
 
 Prepare the building directory and run `cmake` with at least these options:
 
-    mkdir build-python; cd build-python
+    mkdir build-python
+    cd build-python
     cmake -D PKG_PYTHON=ON
           -D BUILD_LIB=ON
           -D BUILD_SHARED_LIBS=ON
           -D CMAKE_INSTALL_PREFIX=$CONDA_PREFIX
-          -D PYTHON_EXECUTABLE=$CONDA_PREFIX/bin/python \
+          -D PYTHON_EXECUTABLE=$CONDA_PREFIX/bin/python
           -D LAMMPS_EXCEPTIONS=ON
           ../cmake
 
-More options to add in `cmake` are available [here](https://lammps.sandia.gov/doc/Build.html). Among them, some useful ones I use:
+More options to add in `cmake` are available [here](https://lammps.sandia.gov/doc/Build.html). Among them, some useful ones I personally use:
 
-    -D LAMMPS_MACHINE=python # Suffix to append to lmp binary
-    -D PKG_MOLECULE=ON  # Model molecular systems with fixed covalent bonds
-    -D PKG_RIGID=ON     # Rigid constraints on collections of atoms or particles
-    -D PKG_KSPACE=ON    # Long-range electrostatic interaction
+          -D LAMMPS_MACHINE=python # Suffix to append to lmp binary
+          -D PKG_MOLECULE=ON  # Model molecular systems with fixed covalent bonds
+          -D PKG_RIGID=ON     # Rigid constraints on collections of atoms or particles
+          -D PKG_KSPACE=ON    # Long-range electrostatic interaction
 
-Once ready, build LAMMPS as a shared library with Python:
+Once ready, build and install LAMMPS as a shared library with Python:
 
     make
     make install
@@ -114,6 +110,10 @@ You should now be able to run LAMMPS from the command line and to import `lammps
 
     lmp_python
     python -c "import lammps"
+
+Do not forget to deactivate your virtual Python environment when you are done working:
+
+    conda deactivate
 
 ---
 **NOTE**
