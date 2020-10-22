@@ -1,17 +1,15 @@
-EasyLAMMPS's documentation
-==========================
-
-.. autosummary::
+.. include:: intro.rst
 
 .. toctree::
+   :caption: Table of Contents
+   :name: mastertoc
    :maxdepth: 2
-   :caption: Contents:
 
+   README
    easylammps
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`

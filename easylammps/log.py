@@ -22,6 +22,19 @@ class Log(object):
     run : int, default 0, meaning all runs
         Extract only ith run.
 
+    Attributes
+    ----------
+    filename : str
+        LAMMPS Log file.
+    f : file object 
+        LAMMPS Log file object.
+    run : int
+        Extract only ith run.
+    fields : list
+        List of fields in current run.
+    current_run : int
+        Number of the current run.
+
     Examples
     --------
     Memory efficient iteration over each configuration:

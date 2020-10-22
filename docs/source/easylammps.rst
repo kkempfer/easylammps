@@ -1,52 +1,39 @@
-.. automodule:: easylammps
-   :members:
-   :undoc-members:
-   :show-inheritance:
+API reference
+=============
+
+This page presents all public **easylammps** classes.
 
 easylammps.Data class
 ---------------------
 
 .. autoclass:: easylammps.Data
-   :members:
-   :undoc-members:
-   :show-inheritance:
 
 easylammps.Log class
----------------------
+--------------------
 
 .. autoclass:: easylammps.Log
-   :members:
-   :undoc-members:
-   :show-inheritance:
+   :special-members: __del__, __iter__, __next__
 
 easylammps.AveTime class
 ------------------------
 
 .. autoclass:: easylammps.AveTime
-   :members:
-   :undoc-members:
-   :show-inheritance:
+   :special-members: __del__, __iter__, __next__
 
 easylammps.AveCorrelate class
 -----------------------------
 
 .. autoclass:: easylammps.AveCorrelate
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-easylammps.AveHisto class
--------------------------
-
-.. autoclass:: easylammps.AveHisto
-   :members:
-   :undoc-members:
-   :show-inheritance:
+   :special-members: __del__, __iter__, __next__
 
 easylammps.AveChunk class
 -------------------------
 
 .. autoclass:: easylammps.AveChunk
-   :members:
-   :undoc-members:
-   :show-inheritance:
+   :special-members: __del__,__iter__,__next__
+
+easylammps.AveHisto class
+-------------------------
+
+.. autoclass:: easylammps.AveHisto
+   :special-members: __del__, __iter__, __next__
