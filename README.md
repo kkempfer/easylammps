@@ -27,9 +27,9 @@ Dependencies
 
 Required:
 
+* [networkx](https://networkx.github.io/) Data structures for graphs and graph algorithms
 * [numpy](https://docs.scipy.org/doc/numpy/reference/) Scientific computing
 * [pandas](https://pandas.pydata.org/) Labeled data analysis
-* [networkx](https://networkx.github.io/) Data structures for graphs and graph algorithms
 
 Recommended:
 
@@ -38,7 +38,7 @@ Recommended:
 ---
 **NOTE**
 
-But, those dependencies can also be installed independently with `conda` before installing `easylammps` from source:
+Those dependencies can also be installed independently with `conda` before installing `easylammps` from source:
 
     conda install matplotlib networkx numpy pandas
 

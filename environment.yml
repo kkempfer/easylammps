@@ -2,7 +2,7 @@ name: lammps
 channels:
   - defaults
 dependencies:
+  - matplotlib
   - networkx
   - numpy
   - pandas
-  - matplotlib
