@@ -1,9 +1,7 @@
-
 EasyLAMMPS
 ==========
 
-A user-friendly Python package to manipulate input and output files of `LAMMPS <https://lammps.sandia.gov/doc/Manual.html>`_ molecular dynamics code.
-One Python class per LAMMPS file type. Includes conversion into `pandas <http://pandas.pydata.org>`_ DataFrame objects.
+A user-friendly Python package to manipulate input and output files of `LAMMPS <https://lammps.sandia.gov/doc/Manual.html>`_ molecular dynamics code. One Python class per LAMMPS file type. Includes conversion into `pandas <http://pandas.pydata.org>`_ DataFrame objects.
 
 Installation
 ------------
@@ -12,15 +10,15 @@ Clone this repository:
 
 .. code-block::
 
-   git clone https://github.com/kkempfer/easylammps.git    
+   git clone https://github.com/kkempfer/easylammps.git
 
 
-Create and activate a virtual Python environment (recommended), for example using `Anaconda <https://docs.anaconda.com/>`_ package and environment manager:
+Create and activate a virtual Python environment (recommended) with the name ``lammps``\ , for example using `Anaconda <https://docs.anaconda.com/>`_ package and environment manager:
 
 .. code-block::
 
-   conda create --name <env-name> --clone base
-   conda activate <env-name>
+   conda create --name lammps
+   conda activate lammps
 
 
 Install ``easylammps`` and its dependencies:
@@ -30,14 +28,35 @@ Install ``easylammps`` and its dependencies:
    pip install ./easylammps
 
 
+----
+
+**NOTE**
+
+Another option is to create the ``lammps`` environment based on the ``environment.yml`` file:
+
+.. code-block::
+
+   cd easylammps
+   conda env create -f environment.yml
+   pip install .
+
+
+----
 
 Dependencies
 ------------
 
+Required:
 
+
+* `networkx <https://networkx.github.io/>`_ Data structures for graphs and graph algorithms
 * `numpy <https://docs.scipy.org/doc/numpy/reference/>`_ Scientific computing
 * `pandas <https://pandas.pydata.org/>`_ Labeled data analysis
-* `networkx <https://networkx.github.io/>`_ Data structures for graphs and graph algorithms
+
+Recommended:
+
+
+* `matplotlib <https://matplotlib.org/>`_ Visualization
 
 Examples
 --------
@@ -63,7 +82,7 @@ Use the virtual Python environment where ``easylammps`` is installed (recommende
 
 .. code-block::
 
-   conda activate <env-name>
+   conda activate lammps
 
 
 Prepare the building directory and run ``cmake`` with at least these options:
@@ -81,7 +100,7 @@ Prepare the building directory and run ``cmake`` with at least these options:
          ../cmake
 
 
-More options to add in ``cmake`` are available `here <https://lammps.sandia.gov/doc/Build.html>`_. Among them, some useful ones I personally use:
+More options to add in ``cmake`` are available `here <https://lammps.sandia.gov/doc/Build.html>`_. Among them, some useful ones are presented here:
 
 .. code-block::
 
@@ -99,7 +118,7 @@ Once ready, build and install LAMMPS as a shared library with Python:
    make install
 
 
-Finally, we need to add the library path which contains the installed ``liblammps.so`` to LD_LIBRARY_PATH, but only when our virtual Python environment ``<env-name>`` is active. Anaconda provides a way to `manage environment variables <https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#saving-environment-variables>`_. On Linux, the procedure is described below.
+Finally, we need to add the library path which contains the installed ``liblammps.so`` to LD_LIBRARY_PATH, but only when our virtual Python environment ``lammps`` is active. Anaconda provides a way to `manage environment variables <https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#saving-environment-variables>`_. On Linux, the procedure is described below.
 
 Enter to the conda environment directory and create these subdirectories and files:
 
@@ -187,4 +206,4 @@ I gratefully acknowledge Alain Dequidt for his inspiring ideas in scientific com
 Get in touch
 ------------
 
-Please send me bug reports, ideas and questions `on GitHub <https://github.com/kkempfer/easylammps>`_.
+Please send bug reports, ideas and questions `on GitHub <https://github.com/kkempfer/easylammps>`_.

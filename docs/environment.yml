@@ -2,6 +2,7 @@ name: easylammps_docs
 channels:
   - defaults
 dependencies:
+  - m2r      
   - networkx
   - numpy
   - pandas

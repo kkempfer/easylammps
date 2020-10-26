@@ -1,7 +1,8 @@
 EasyLAMMPS
 ==========
 
-A user-friendly Python package to manipulate input and output files of [LAMMPS](https://lammps.sandia.gov/doc/Manual.html) molecular dynamics code. One Python class per LAMMPS file type. Includes conversion into [pandas](http://pandas.pydata.org) DataFrame objects.
+A user-friendly Python package to manipulate input and output files of Large-scale Atomic/Molecular Massively Parallel
+Simulator [LAMMPS](https://lammps.sandia.gov/doc/Manual.html) molecular dynamics code. One Python class per LAMMPS file type. Includes conversion into [pandas](http://pandas.pydata.org) DataFrame objects.
 
 
 Installation
@@ -18,15 +19,16 @@ Create and activate a virtual Python environment (recommended) with the name `la
 
 Install `easylammps` and its dependencies:
 
-    cd easylammps
-    pip install .
+    pip install ./easylammps
 
 ---
 **NOTE**
 
 Another option is to create the `lammps` environment based on the `environment.yml` file:
 
+    cd easylammps
     conda env create -f environment.yml
+    pip install .
 
 ---
 
@@ -79,7 +81,7 @@ Prepare the building directory and run `cmake` with at least these options:
           -D LAMMPS_EXCEPTIONS=ON
           ../cmake
 
-More options to add in `cmake` are available [here](https://lammps.sandia.gov/doc/Build.html). Among them, some useful ones I personally use:
+More options to add in `cmake` are available [here](https://lammps.sandia.gov/doc/Build.html). Among them, some useful ones are presented here:
 
           -D LAMMPS_MACHINE=python # Suffix to append to lmp binary
           -D PKG_MOLECULE=ON  # Model molecular systems with fixed covalent bonds
@@ -166,4 +168,4 @@ I gratefully acknowledge Alain Dequidt for his inspiring ideas in scientific com
 Get in touch
 ------------
 
-Please send me bug reports, ideas and questions [on GitHub](https://github.com/kkempfer/easylammps).
+Please send bug reports, ideas and questions [on GitHub](https://github.com/kkempfer/easylammps).
