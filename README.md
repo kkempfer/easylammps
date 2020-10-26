@@ -21,6 +21,15 @@ Install `easylammps` and its dependencies:
     cd easylammps
     pip install .
 
+---
+**NOTE**
+
+Another option is to create the `lammps` environment based on the `environment.yml` file:
+
+    conda env create -f environment.yml
+
+---
+
 
 Dependencies
 ------------
@@ -34,15 +43,6 @@ Required:
 Recommended:
 
 * [matplotlib](https://matplotlib.org/) Visualization
-
----
-**NOTE**
-
-Those dependencies can also be installed independently with `conda` before installing `easylammps` from source:
-
-    conda install matplotlib networkx numpy pandas
-
----
 
 
 Examples
