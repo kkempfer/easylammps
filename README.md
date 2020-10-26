@@ -160,7 +160,7 @@ EasyLAMMPS is licensed under the AGPL-3.0 license. See the LICENSE file for a fu
 Acknowledgements
 ----------------
 
-I kindly thank Julien Devémy who introduced me to the Python programming language. Part of the code used to write `easylammps` as been taken and modified from his `lammps-tools` package available [on Github](https://github.com/jdevemy/lammps-tools).
+I kindly thank Julien Devémy who introduced me to the Python programming language. Part of the code used to write `easylammps` as been taken and modified from his [`lammps-tools`](https://github.com/jdevemy/lammps-tools) package.
 
 I gratefully acknowledge Alain Dequidt for his inspiring ideas in scientific computing.
 
