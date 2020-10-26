@@ -1,0 +1,8 @@
+name: lammps
+channels:
+  - defaults
+dependencies:
+  - networkx
+  - numpy
+  - pandas
+  - matplotlib

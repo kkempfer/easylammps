@@ -1,8 +1,7 @@
 EasyLAMMPS
 ==========
 
-A user-friendly Python package to manipulate input and output files of [LAMMPS](https://lammps.sandia.gov/doc/Manual.html) molecular dynamics code.
-One Python class per LAMMPS file type. Includes conversion into [pandas](http://pandas.pydata.org) DataFrame objects.
+A user-friendly Python package to manipulate input and output files of [LAMMPS](https://lammps.sandia.gov/doc/Manual.html) molecular dynamics code. One Python class per LAMMPS file type. Includes conversion into [pandas](http://pandas.pydata.org) DataFrame objects.
 
 
 Installation
@@ -10,24 +9,40 @@ Installation
 
 Clone this repository:
 
-    git clone https://github.com/kkempfer/easylammps.git    
+    git clone https://github.com/kkempfer/easylammps.git
 
-Create and activate a virtual Python environment (recommended), for example using [Anaconda](https://docs.anaconda.com/) package and environment manager:
+Create and activate a virtual Python environment (recommended) with the name `lammps`, for example using [Anaconda](https://docs.anaconda.com/) package and environment manager:
 
-    conda create --name <env-name> --clone base
-    conda activate <env-name>
+    conda create --name lammps
+    conda activate lammps
 
 Install `easylammps` and its dependencies:
 
-    pip install ./easylammps
+    cd easylammps
+    pip install .
 
 
 Dependencies
 ------------
 
+Required:
+
 * [numpy](https://docs.scipy.org/doc/numpy/reference/) Scientific computing
 * [pandas](https://pandas.pydata.org/) Labeled data analysis
 * [networkx](https://networkx.github.io/) Data structures for graphs and graph algorithms
+
+Recommended:
+
+* [matplotlib](https://matplotlib.org/) Visualization
+
+---
+**NOTE**
+
+But, those dependencies can also be installed independently with `conda` before installing `easylammps` from source:
+
+    conda install matplotlib networkx numpy pandas
+
+---
 
 
 Examples
@@ -50,7 +65,7 @@ Clone the official LAMMPS repository (stable release):
 
 Use the virtual Python environment where `easylammps` is installed (recommended):
 
-    conda activate <env-name>
+    conda activate lammps
 
 Prepare the building directory and run `cmake` with at least these options:
 
@@ -76,7 +91,7 @@ Once ready, build and install LAMMPS as a shared library with Python:
     make
     make install
 
-Finally, we need to add the library path which contains the installed `liblammps.so` to LD_LIBRARY_PATH, but only when our virtual Python environment `<env-name>` is active. Anaconda provides a way to [manage environment variables](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#saving-environment-variables). On Linux, the procedure is described below.
+Finally, we need to add the library path which contains the installed `liblammps.so` to LD_LIBRARY_PATH, but only when our virtual Python environment `lammps` is active. Anaconda provides a way to [manage environment variables](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#saving-environment-variables). On Linux, the procedure is described below.
 
 Enter to the conda environment directory and create these subdirectories and files:
 
