@@ -2,7 +2,7 @@ EasyLAMMPS
 ==========
 
 A user-friendly Python package to manipulate input and output files of Large-scale Atomic/Molecular Massively Parallel
-Simulator [LAMMPS](https://lammps.sandia.gov/doc/Manual.html) molecular dynamics code. One Python class per LAMMPS file type. Includes conversion into [pandas](http://pandas.pydata.org) DataFrame objects.
+Simulator [LAMMPS](https://lammps.sandia.gov/doc/Manual.html) molecular dynamics code. One Python class per LAMMPS file type. Includes conversion into [`pandas`](http://pandas.pydata.org) DataFrame objects.
 
 
 Installation
@@ -45,12 +45,6 @@ Required:
 Recommended:
 
 * [matplotlib](https://matplotlib.org/) Visualization
-
-
-Examples
---------
-
-Coming soon!
 
 
 Install LAMMPS as a shared library with Python (optional)
@@ -138,6 +132,12 @@ Do not forget to deactivate your virtual Python environment when you are done wo
 For now, installing LAMMPS as a shared library with Python is not mandatory to use the `easylammps` package. In future, we may add some functionalities using the `lammps` Python library, such as easy access to LAMMPS binary restart files.
 
 ---
+
+
+Examples
+--------
+
+Coming soon!
 
 
 Developments
