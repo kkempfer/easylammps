@@ -19,7 +19,8 @@ Create and activate a virtual Python environment (recommended) with the name `la
 
 Install `easylammps` and its dependencies:
 
-    pip install ./easylammps
+    cd easylammps
+    pip install .
 
 ---
 **NOTE**
@@ -50,7 +51,7 @@ Recommended:
 Install LAMMPS as a shared library with Python (optional)
 ---------------------------------------------------------
 
-Coupling [Python with LAMMPS]([https://lammps.sandia.gov/doc/Python_head.html) opens the door to many advanced extensions. Fortunately, the [`lammps`](https://lammps.sandia.gov/doc/Python_module.html) Python library already wraps the LAMMPS C-library interface. Here, we propose a quick installation guide.
+Coupling [Python with LAMMPS]([https://lammps.sandia.gov/doc/Python_head.html) opens the door to many advanced extensions. Fortunately, the `lammps` Python library already wraps the [LAMMPS C-library interface](https://lammps.sandia.gov/doc/Python_module.html). Here, we propose a quick installation guide.
 
 Clone the official LAMMPS repository (stable release):
 

@@ -36,23 +36,25 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 # -- Options for HTML output -------------------------------------------------
 
-html_theme = "sphinx_rtd_theme"
+html_theme = "pydata_sphinx_theme"
 
 # html_logo = "_static/logo.png"
 
 html_theme_options = {
-    "canonical_url": "https://github.com/kkempfer/easylammps/docs",
-    "logo_only": True,
-    "display_version": True,
-    "prev_next_buttons_location": "both",
-    "style_external_links": False,
-    "style_nav_header_background": None,
-    # Toc options
-    "collapse_navigation": True,
-    "sticky_navigation": True,
-    "navigation_depth": 4,
-    "includehidden": True,
-    "titles_only": False,
+    "github_url": "https://github.com/kkempfer/easylammps",
+    "external_links": [{"url": "https://lammps.sandia.gov", "name": "LAMMPS"}],
+    "use_edit_page_button": True,
+    "search_bar_position": "sidebar",  # navbar
+    "navigation_with_keys": True,
+    "show_toc_level": 2,
+}
+
+html_context = {
+    "github_url": "https://github.com",
+    "github_user": "kkempfer",
+    "github_repo": "easylammps",
+    "github_version": "main",
+    "doc_path": "docs/source",
 }
 
 html_static_path = ["_static"]
