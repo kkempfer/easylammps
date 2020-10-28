@@ -36,6 +36,27 @@ Recommended:
 * [matplotlib](https://matplotlib.org/) Visualization
 
 
+Build the documentation (optional)
+----------------------------------
+
+Enter to the documentation directory:
+
+    cd docs
+
+Create the `easylammps_docs` environment based on the `environment.yml` file:
+
+    conda env create -f environment.yml
+    conda activate easylammps_docs
+
+Make the documentation using [`sphinx`](https://www.sphinx-doc.org/):
+
+    make html
+
+Do not forget to deactivate your virtual Python environment when you are done working:
+
+    conda deactivate
+
+
 Install LAMMPS as a shared library with Python (optional)
 ---------------------------------------------------------
 
@@ -121,23 +142,6 @@ Do not forget to deactivate your virtual Python environment when you are done wo
 For now, installing LAMMPS as a shared library with Python is not mandatory to use the `easylammps` package. In future, we may add some functionalities using the `lammps` Python library, such as easy access to LAMMPS binary restart files.
 
 ---
-
-
-Build the documentation
------------------------
-
-Enter to the documentation directory:
-
-    cd easylammps/docs
-
-Create the `easylammps_docs` environment based on the `environment.yml` file:
-
-    conda env create -f environment.yml
-    conda activate easylammps_docs
-
-Make the documentation using [`sphinx`](https://www.sphinx-doc.org/):
-
-    make html
 
 
 Examples
