@@ -1,7 +1,7 @@
 Installation
 ============
 
-Create and activate a virtual Python environment (recommended) with the name ``lammps``, for example using `Anaconda <https://docs.anaconda.com/>`_ package and environment manager:
+Create and activate a virtual Python environment (recommended) with the name ``lammps``, for example using `Anaconda <https://anaconda.org/>`_ package and environment manager:
 
 .. code-block::
 
@@ -32,8 +32,8 @@ Dependencies
 
 Required:
 
-* `networkx <https://networkx.github.io/>`_ Data structures for graphs and graph algorithms
-* `numpy <https://docs.scipy.org/doc/numpy/reference/>`_ Scientific computing
+* `networkx <https://networkx.org/>`_ Data structures for graphs and graph algorithms
+* `numpy <https://numpy.org/>`_ Scientific computing
 * `pandas <https://pandas.pydata.org/>`_ Labeled data analysis
 
 Recommended:

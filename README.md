@@ -1,7 +1,7 @@
 EasyLAMMPS
 ==========
 
-A user-friendly Python package to manipulate input and output files of Large-scale Atomic/Molecular Massively Parallel Simulator [LAMMPS](https://lammps.sandia.gov/doc/Manual.html) molecular dynamics code. One Python class per LAMMPS file type. Includes conversion into [`pandas`](http://pandas.pydata.org) DataFrame objects.
+A user-friendly Python package to manipulate input and output files of Large-scale Atomic/Molecular Massively Parallel Simulator [LAMMPS](https://lammps.sandia.gov/) molecular dynamics code. One Python class per LAMMPS file type. Includes conversion into [`pandas`](https://pandas.pydata.org/) DataFrame objects.
 
 
 Installation
@@ -11,7 +11,7 @@ Clone this repository:
 
     git clone https://github.com/kkempfer/easylammps.git
 
-Create and activate a virtual Python environment (recommended) with the name `lammps`, for example using [Anaconda](https://docs.anaconda.com/) package and environment manager:
+Create and activate a virtual Python environment (recommended) with the name `lammps`, for example using [Anaconda](https://anaconda.org/) package and environment manager:
 
     conda create --name lammps
     conda activate lammps
@@ -27,8 +27,8 @@ Dependencies
 
 Required:
 
-* [networkx](https://networkx.github.io/) Data structures for graphs and graph algorithms
-* [numpy](https://docs.scipy.org/doc/numpy/reference/) Scientific computing
+* [networkx](https://networkx.org/) Data structures for graphs and graph algorithms
+* [numpy](https://numpy.org/) Scientific computing
 * [pandas](https://pandas.pydata.org/) Labeled data analysis
 
 Recommended:
@@ -135,7 +135,7 @@ Create the `easylammps_docs` environment based on the `environment.yml` file:
     conda env create -f environment.yml
     conda activate easylammps_docs
 
-Make the documentation using [`sphinx`](https://www.sphinx-doc.org):
+Make the documentation using [`sphinx`](https://www.sphinx-doc.org/):
 
     make html
 
@@ -166,7 +166,7 @@ EasyLAMMPS is licensed under the AGPL-3.0 license. See the LICENSE file for a fu
 Acknowledgements
 ----------------
 
-I kindly thank Julien Devémy who introduced me to the Python programming language. Part of the code used to write `easylammps` as been taken and modified from his [`lammps-tools`](https://github.com/jdevemy/lammps-tools) package.
+I kindly thank Julien Devémy who introduced me to the Python programming language. Part of the code used to write `easylammps` as been taken and modified from his [`lammps-tools`](https://github.com/jdevemy/lammps-tools/) package.
 
 I gratefully acknowledge Alain Dequidt for his inspiring ideas in scientific computing.
 
@@ -174,4 +174,4 @@ I gratefully acknowledge Alain Dequidt for his inspiring ideas in scientific com
 Get in touch
 ------------
 
-Please send bug reports, ideas and questions [on GitHub](https://github.com/kkempfer/easylammps).
+Please send bug reports, ideas and questions [on GitHub](https://github.com/kkempfer/easylammps/).
