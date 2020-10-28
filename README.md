@@ -43,7 +43,7 @@ Enter to the documentation directory:
 
     cd docs
 
-Create the `easylammps_docs` environment based on the `environment.yml` file:
+Create and activate the virtual Python environment `easylammps_docs` based on the `environment.yml` file:
 
     conda env create -f environment.yml
     conda activate easylammps_docs
@@ -52,7 +52,7 @@ Make the documentation using [`sphinx`](https://www.sphinx-doc.org/):
 
     make html
 
-Do not forget to deactivate your virtual Python environment when you are done working:
+Deactivate your virtual Python environment:
 
     conda deactivate
 
