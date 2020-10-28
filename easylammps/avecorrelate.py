@@ -120,7 +120,7 @@ class AveCorrelate(object):
 
     def to_pandas(self):
         """
-        Convert :class:`AveCorrelate` into a pandas DataFrame.
+        Convert into a pandas DataFrame.
 
         Returns
         -------

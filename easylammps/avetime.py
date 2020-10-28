@@ -146,7 +146,7 @@ class AveTime(object):
 
     def to_pandas(self):
         """
-        Convert :class:`AveTime` into a pandas DataFrame.
+        Convert into a pandas DataFrame.
 
         Returns
         -------

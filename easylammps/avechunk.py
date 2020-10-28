@@ -120,7 +120,7 @@ class AveChunk(object):
 
     def to_pandas(self):
         """
-        Convert :class:`AveChunk` into a pandas DataFrame.
+        Convert into a pandas DataFrame.
 
         Returns
         -------

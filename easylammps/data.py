@@ -107,7 +107,7 @@ class Data(object):
     >>> data.impropers
     []
 
-    Initialize an empty LAMMPS object:
+    Initialize an empty LAMMPS Data object:
 
     >>> data = Data()
 
@@ -1298,7 +1298,7 @@ class Data(object):
 
     def write_to_file(self, filename="lammps.data", is_coeffs=False):
         """
-        Write :class:`Data` to a LAMMPS data file.
+        Write Data to a LAMMPS data file.
 
         Parameters
         ----------
@@ -1813,7 +1813,7 @@ class Data(object):
 
     def to_networkx(self):
         """
-        Convert :class:`Data` into a NetworkX Graph.
+        Convert Data into a NetworkX Graph.
 
         Returns
         -------

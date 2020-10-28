@@ -140,7 +140,7 @@ class Log(object):
 
     def to_pandas(self):
         """
-        Convert :class:`Log` into a pandas DataFrame.
+        Convert into a pandas DataFrame.
 
         Returns
         -------

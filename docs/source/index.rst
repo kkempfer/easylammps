@@ -32,7 +32,7 @@
 EasyLAMMPS - a user-friendly LAMMPS analysis library for Python
 ===============================================================
 
-**easylammps** is a Python package providing structures to manipulate
+``easylammps`` is a Python package providing structures to manipulate
 input and output files of Large-scale Atomic/Molecular Massively Parallel
 Simulator `LAMMPS <https://lammps.sandia.gov>`_ molecular dynamics code.
 

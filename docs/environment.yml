@@ -1,8 +1,9 @@
 name: easylammps_docs
 channels:
   - defaults
+  - conda-forge
 dependencies:
-  - m2r      
+  - m2r
   - networkx
   - numpy
   - pandas

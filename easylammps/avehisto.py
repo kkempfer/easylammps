@@ -136,7 +136,7 @@ class AveHisto(object):
 
     def to_pandas(self, is_norm=True):
         """
-        Convert :class:`AveChunk` into a pandas DataFrame.
+        Convert into a pandas DataFrame.
 
         Parameters
         ----------

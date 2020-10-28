@@ -1,8 +1,7 @@
 EasyLAMMPS
 ==========
 
-A user-friendly Python package to manipulate input and output files of Large-scale Atomic/Molecular Massively Parallel
-Simulator [LAMMPS](https://lammps.sandia.gov/doc/Manual.html) molecular dynamics code. One Python class per LAMMPS file type. Includes conversion into [`pandas`](http://pandas.pydata.org) DataFrame objects.
+A user-friendly Python package to manipulate input and output files of Large-scale Atomic/Molecular Massively Parallel Simulator [LAMMPS](https://lammps.sandia.gov/doc/Manual.html) molecular dynamics code. One Python class per LAMMPS file type. Includes conversion into [`pandas`](http://pandas.pydata.org) DataFrame objects.
 
 
 Installation
@@ -21,17 +20,6 @@ Install `easylammps` and its dependencies:
 
     cd easylammps
     pip install .
-
----
-**NOTE**
-
-Another option is to create the `lammps` environment based on the `environment.yml` file:
-
-    cd easylammps
-    conda env create -f environment.yml
-    pip install .
-
----
 
 
 Dependencies
@@ -133,6 +121,23 @@ Do not forget to deactivate your virtual Python environment when you are done wo
 For now, installing LAMMPS as a shared library with Python is not mandatory to use the `easylammps` package. In future, we may add some functionalities using the `lammps` Python library, such as easy access to LAMMPS binary restart files.
 
 ---
+
+
+Build the documentation
+-----------------------
+
+Enter to the documentation directory:
+
+    cd easylammps/docs
+
+Create the `easylammps_docs` environment based on the `environment.yml` file:
+
+    conda env create -f environment.yml
+    conda activate easylammps_docs
+
+Make the documentation using [`sphinx`](https://www.sphinx-doc.org):
+
+    make html
 
 
 Examples
