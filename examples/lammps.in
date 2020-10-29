@@ -1,0 +1,15 @@
+units             real
+
+atom_style        full
+bond_style        harmonic
+angle_style       cosine/squared
+pair_style        lj/gromacs 9.0 12.0
+special_bonds     lj 0.0 1.0 1.0
+neighbor          2.5 bin
+neigh_modify      delay 1 every 1 check yes
+
+read_data         system.data
+
+pair_coeff        1 1 0.8365200764818 4.7 # C1
+bond_coeff        1 1.4937858508604 4.7 # C1-C1
+angle_coeff       1 2.9875717017208 180 # C1-C1-C1

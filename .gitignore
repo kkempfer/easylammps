@@ -17,3 +17,6 @@ dist/
 
 # Jupyter notebooks
 .ipynb_checkpoints
+
+# Moltemplate
+output_ttree

@@ -1031,8 +1031,14 @@ class Data(object):
         f = open(filename, "r")
 
         for line in f:
+            line = line.strip()
+
+            if line == "":
+                continue
+
             if not line.startswith("pair_coeff"):
                 continue
+
             # Expand indices, if using wild-cards
             ids_i = expand_ids(line.split()[1], nb_atom_types)
             ids_j = expand_ids(line.split()[2], nb_atom_types)
@@ -1096,8 +1102,14 @@ class Data(object):
         f = open(filename, "r")
 
         for line in f:
+            line = line.strip()
+
+            if line == "":
+                continue
+
             if not line.startswith("bond_coeff"):
                 continue
+
             # Expand indices, if using wild-cards
             ids = expand_ids(line.split()[1], nb_bond_types)
             for i in ids:
@@ -1148,8 +1160,14 @@ class Data(object):
         f = open(filename, "r")
 
         for line in f:
+            line = line.strip()
+
+            if line == "":
+                continue
+
             if not line.startswith("angle_coeff"):
                 continue
+
             # Expand indices, if using wild-cards
             ids = expand_ids(line.split()[1], nb_angle_types)
             for i in ids:
@@ -1200,8 +1218,14 @@ class Data(object):
         f = open(filename, "r")
 
         for line in f:
+            line = line.strip()
+
+            if line == "":
+                continue
+
             if not line.startswith("dihedral_coeff"):
                 continue
+
             # Expand indices, if using wild-cards
             ids = expand_ids(line.split()[1], nb_dihedral_types)
             for i in ids:
@@ -1259,8 +1283,14 @@ class Data(object):
         f = open(filename, "r")
 
         for line in f:
+            line = line.strip()
+
+            if line == "":
+                continue
+
             if not line.startswith("improper_coeff"):
                 continue
+
             # Expand indices, if using wild-cards
             ids = expand_ids(line.split()[1], nb_improper_types)
             for i in ids:

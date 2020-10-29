@@ -1,0 +1,9 @@
+    units             real
+
+    atom_style        full
+    bond_style        harmonic
+    angle_style       cosine/squared
+    pair_style        lj/gromacs 9.0 12.0
+    special_bonds     lj 0.0 1.0 1.0
+    neighbor          2.5 bin
+    neigh_modify      delay 1 every 1 check yes
