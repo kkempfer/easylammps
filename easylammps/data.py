@@ -86,12 +86,14 @@ class Data(object):
 
     >>> data.atom_types
     [{'i': 1, 'mass': 11.611, 'comment': 'C3H'}, {'i': 2, 'mass': 11.611, 'comment': 'CTO'}, {'i': 3, 'mass': 1.008, 'comment': 'H'}, {'i': 4, 'mass': 15.599, 'comment': 'OH'}, {'i': 5, 'mass': 1.008, 'comment': 'HO'}, {'i': 6, 'mass': 0.4, 'comment': 'D_C3H'}, {'i': 7, 'mass': 0.4, 'comment': 'D_CTO'}, {'i': 8, 'mass': 0.4, 'comment': 'D_OH'}]
+    >>> len(data.bond_types)
+    8
     >>> data.bond_types[0]
     {'i': 1, 'coeffs': [267.9907, 1.529], 'style': None, 'comment': 'C3H-CTO'}
     >>> data.bond_types[-1]
     {'i': 8, 'coeffs': [500.0, 0.0], 'style': None, 'comment': 'D_OH'}
 
-    List of atoms, bonds, angles, dihedral angles and impropers. Nested dict-like structure:
+    List of atoms, bonds, angles, dihedral angles and impropers:
 
     >>> len(data.atoms)
     3000
@@ -198,7 +200,7 @@ class Data(object):
 
         Parameters
         ----------
-        atom_type_is : tuple
+        atom_type_is : (int, int)
             The two atom type indices composing the pair.
         coeffs : list, optional
             Pair type coefficients.
@@ -417,7 +419,7 @@ class Data(object):
 
         Parameters
         ----------
-        atom_is : tuple
+        atom_is : (int, int)
             The two atom indices composing the bond.
         i : int, optional
             Bond index.
@@ -448,7 +450,7 @@ class Data(object):
 
         Parameters
         ----------
-        atom_is : tuple
+        atom_is : (int, int, int)
             The three atom indices composing the angle.
         i : int, optional
             Angle index.
@@ -486,7 +488,7 @@ class Data(object):
 
         Parameters
         ----------
-        atom_is : tuple
+        atom_is : (int, int, int, int)
             The four atom indices composing the dihedral angle.
         i : int, optional
             Dihedral angle index.
@@ -526,7 +528,7 @@ class Data(object):
 
         Parameters
         ----------
-        atom_is : tuple
+        atom_is : (int, int, int, int)
             The four atom indices composing the improper.
         i : int, optional
             Improper index.

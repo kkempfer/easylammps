@@ -64,7 +64,7 @@ Supported structures
   - **LAMMPS DumpLocal**, where result from LAMMPS `dump local` command
     is written. This file contains the trajectory of local attributes
     such as pairs, bonds, angles, dihedral angles and impropers. See
-    `compute property/local` command.
+    LAMMPS `compute property/local` command.
   - **LAMMPS AveTime**, where result from LAMMPS `fix ave/time` command
     is written.
   - **LAMMPS AveCorrelate**, where result from LAMMPS `fix ave/correlate`
