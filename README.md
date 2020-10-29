@@ -7,14 +7,14 @@ A user-friendly Python package to manipulate input and output files of Large-sca
 Installation
 ------------
 
-Clone this repository:
-
-    git clone https://github.com/kkempfer/easylammps.git
-
 Create and activate a virtual Python environment (recommended) with the name `lammps`, for example using [Anaconda](https://anaconda.org/) package and environment manager:
 
     conda create --name lammps
     conda activate lammps
+
+Clone this repository:
+
+    git clone https://github.com/kkempfer/easylammps.git
 
 Install `easylammps` and its dependencies:
 
@@ -155,8 +155,8 @@ Developments
 
 * Use of [black](https://black.readthedocs.io/) to auto-format Python code
 * Use of [sphinx](https://www.sphinx-doc.org/) to auto-build documentation based on Python docstrings
-* Add [pytest](https://docs.pytest.org/) (or equivalent)
 * Add [jupyter](https://jupyter.org/) notebooks tutorials
+* Add [pytest](https://docs.pytest.org/) (or equivalent)
 * Add Input object to read LAMMPS input file ?
 * Add Restart object to read LAMMPS restart file ?
 
