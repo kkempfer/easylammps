@@ -1296,7 +1296,7 @@ class Data(object):
                 if improper_type is not None
             ]
 
-    def write_to_file(self, filename="lammps.data", is_coeffs=False):
+    def write_to_file(self, filename="lammps.data", write_coeffs=False):
         """
         Write Data to a LAMMPS data file.
 
@@ -1304,7 +1304,7 @@ class Data(object):
         ----------
         filename : str, default 'lammps.data'
             LAMMPS data file.
-        is_coeffs : bool, default 'False'
+        write_coeffs : bool, default 'False'
             Include force field information ?
         """
         f = open(filename, "w")
@@ -1349,7 +1349,7 @@ class Data(object):
             f.write("\n")
 
         # Coeffs
-        if is_coeffs:
+        if write_coeffs:
 
             # Pair Coeffs
             if [

@@ -97,7 +97,7 @@ class AveHisto(object):
         dict
             Information of the current configuration.
         """
-        stats = {}
+        conf = {}
 
         line = self.f.readline()
         if line == "":
@@ -105,43 +105,43 @@ class AveHisto(object):
 
         # First line
         values = line.split()
-        stats["TimeStep"] = int(values[0])
-        stats["Number-of-bins"] = int(values[1])
-        stats["Total-counts"] = int(
+        conf["TimeStep"] = int(values[0])
+        conf["Number-of-bins"] = int(values[1])
+        conf["Total-counts"] = int(
             float(values[2])
         )  # Integer is written in scientific notation
-        stats["Missing-counts"] = int(values[3])
-        stats["Min-value"] = float(values[4])
-        stats["Max-value"] = float(values[5])
+        conf["Missing-counts"] = int(values[3])
+        conf["Min-value"] = float(values[4])
+        conf["Max-value"] = float(values[5])
 
         # Check if missing counts
-        if stats["Missing-counts"] != 0:
+        if conf["Missing-counts"] != 0:
             logging.warning(
-                "Missing counts is not zero ({:d}).".format(stats["Missing-counts"])
+                "Missing counts is not zero ({:d}).".format(conf["Missing-counts"])
             )
 
         # Next Number-of-bins lines
         for field in self.fields:
-            stats[field] = []
-        for _ in range(stats["Number-of-bins"]):
+            conf[field] = []
+        for _ in range(conf["Number-of-bins"]):
             line = self.f.readline()
             values = line.split()
             for field, value in zip(self.fields, values):
                 try:
-                    stats[field].append(int(value))
+                    conf[field].append(int(value))
                 except ValueError:
-                    stats[field].append(float(value))
+                    conf[field].append(float(value))
 
-        return stats
+        return conf
 
-    def to_pandas(self, is_norm=True):
+    def to_pandas(self, norm=True):
         """
         Convert into a pandas DataFrame.
 
         Parameters
         ----------
-        is_norm : bool, default 'True'
-            Compute and add normalized 'Norm' column to pandas DataFrame ?
+        norm : bool, default 'True'
+            Add normalized 'Norm' column to pandas DataFrame.
 
         Returns
         -------
@@ -151,15 +151,15 @@ class AveHisto(object):
         """
         df = pd.DataFrame([])
 
-        for stats in self:
-            iterables = [[stats["TimeStep"]], stats[self.fields[0]]]
+        for conf in self:
+            iterables = [[conf["TimeStep"]], conf[self.fields[0]]]
             index = pd.MultiIndex.from_product(
                 iterables, names=["TimeStep", self.fields[0]]
             )
             columns = self.fields[1:]
 
-            df_ = pd.DataFrame(stats, index=index, columns=columns)
-            if is_norm:
+            df_ = pd.DataFrame(conf, index=index, columns=columns)
+            if norm:
                 df_["Norm"] = df_[self.fields[2]] / np.trapz(
                     df_[self.fields[2]], df_[self.fields[1]]
                 )

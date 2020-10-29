@@ -8,6 +8,16 @@ easylammps.Data
 
 .. autoclass:: easylammps.Data
 
+easylammps.Dump
+---------------
+
+.. autoclass:: easylammps.Dump
+
+easylammps.DumpLocal
+--------------------
+
+.. autoclass:: easylammps.DumpLocal
+
 easylammps.Log
 --------------
 

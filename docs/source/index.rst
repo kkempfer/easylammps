@@ -23,6 +23,8 @@
 
    Data <easylammps/data>
    Log <easylammps/log>
+   Dump <easylammps/dump>
+   DumpLocal <easylammps/dumplocal>
    AveTime <easylammps/avetime>
    AveCorrelate <easylammps/avecorrelate>
    AveChunk <easylammps/avechunk>
@@ -57,6 +59,12 @@ Supported structures
   - **LAMMPS Log**, where thermodynamic data is printed. For now, only
     one-line summary is supported (most common use case). For more
     information, see LAMMPS `thermo_style` and `thermo_modify` commands.
+  - **LAMMPS Dump**, where result from LAMMPS `dump custom` command
+    is written. This file contains the trajectory of atom attributes.
+  - **LAMMPS DumpLocal**, where result from LAMMPS `dump local` command
+    is written. This file contains the trajectory of local attributes
+    such as pairs, bonds, angles, dihedral angles and impropers. See
+    `compute property/local` command.
   - **LAMMPS AveTime**, where result from LAMMPS `fix ave/time` command
     is written.
   - **LAMMPS AveCorrelate**, where result from LAMMPS `fix ave/correlate`

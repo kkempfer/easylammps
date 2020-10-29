@@ -109,40 +109,40 @@ class AveTime(object):
         dict
             Information of the current configuration.
         """
-        stats = {}
+        conf = {}
 
         line = self.f.readline()
         if line == "":
             raise StopIteration
 
         values = line.split()
-        stats["TimeStep"] = int(values[0])
+        conf["TimeStep"] = int(values[0])
 
         if self.mode == "vector":
 
-            stats["Number-of-rows"] = int(values[1])
+            conf["Number-of-rows"] = int(values[1])
 
             # Next Number-of-rows lines
             for field in self.fields:
-                stats[field] = []
-            for _ in range(stats["Number-of-rows"]):
+                conf[field] = []
+            for _ in range(conf["Number-of-rows"]):
                 line = self.f.readline()
                 values = line.split()
                 for field, value in zip(self.fields, values):
                     try:
-                        stats[field].append(int(value))
+                        conf[field].append(int(value))
                     except ValueError:
-                        stats[field].append(float(value))
+                        conf[field].append(float(value))
 
         elif self.mode == "scalar":
 
             for field, value in zip(self.fields, values[1:]):
                 try:
-                    stats[field] = int(value)
+                    conf[field] = int(value)
                 except ValueError:
-                    stats[field] = float(value)
+                    conf[field] = float(value)
 
-        return stats
+        return conf
 
     def to_pandas(self):
         """
@@ -160,14 +160,14 @@ class AveTime(object):
 
             df = pd.DataFrame([])
 
-            for stats in self:
-                iterables = [[stats["TimeStep"]], stats[self.fields[0]]]
+            for conf in self:
+                iterables = [[conf["TimeStep"]], conf[self.fields[0]]]
                 index = pd.MultiIndex.from_product(
                     iterables, names=["TimeStep", self.fields[0]]
                 )
                 columns = self.fields[1:]
 
-                df_ = pd.DataFrame(stats, index=index, columns=columns)
+                df_ = pd.DataFrame(conf, index=index, columns=columns)
                 df = pd.concat([df, df_])
 
         elif self.mode == "scalar":
