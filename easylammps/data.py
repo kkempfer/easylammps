@@ -1842,7 +1842,7 @@ class Data(object):
 
     def reset_mol_i(self):
         """
-        Reset all molecule indices in atoms list by checking bond topology.
+        Reset all molecule indices in atom list by checking bond topology.
         """
         for atom in self.atoms:
             atom["mol_i"] = None
