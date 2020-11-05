@@ -1,9 +1,0 @@
-import "dodecane.lt"
-
-DODECANE = new DODECANE[100]
-
-write_once("Data Boundary") {
-  0 46.586 xlo xhi
-  0 46.586 ylo yhi
-  0 46.586 zlo zhi
-}
