@@ -40,9 +40,9 @@ More options to add in ``cmake`` are available `here <https://lammps.sandia.gov/
 .. code-block::
 
          -D LAMMPS_MACHINE=python # Suffix to append to lmp binary
-         -D PKG_MOLECULE=ON  # Model molecular systems with fixed covalent bonds
-         -D PKG_RIGID=ON     # Rigid constraints on collections of atoms or particles
-         -D PKG_KSPACE=ON    # Long-range electrostatic interaction
+         -D PKG_MOLECULE=ON # Model molecular systems with fixed covalent bonds
+         -D PKG_RIGID=ON    # Rigid constraints on collections of atoms or particles
+         -D PKG_KSPACE=ON   # Long-range electrostatic interaction
 
 
 Once ready, build and install LAMMPS as a shared library with Python:

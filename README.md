@@ -1,7 +1,7 @@
 EasyLAMMPS
 ==========
 
-A user-friendly Python package to manipulate input and output files of Large-scale Atomic/Molecular Massively Parallel Simulator [LAMMPS](https://lammps.sandia.gov/) molecular dynamics code. One Python class per LAMMPS file type. Includes conversion into [`pandas`](https://pandas.pydata.org/) DataFrame objects.
+A user-friendly Python package to manipulate input and output files of Large-scale Atomic/Molecular Massively Parallel Simulator [LAMMPS](https://lammps.sandia.gov/) molecular dynamics code. One Python class per LAMMPS file type. Includes conversion into [`pandas.DataFrame`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html) objects.
 
 
 Installation
@@ -56,6 +56,8 @@ Deactivate your virtual Python environment:
 
     conda deactivate
 
+Access the documentation in the build/html directory.
+
 
 Install LAMMPS as a shared library with Python (optional)
 ---------------------------------------------------------
@@ -88,9 +90,9 @@ Prepare the building directory and run `cmake` with at least these options:
 More options to add in `cmake` are available [here](https://lammps.sandia.gov/doc/Build.html). Among them, some useful ones are presented here:
 
           -D LAMMPS_MACHINE=python # Suffix to append to lmp binary
-          -D PKG_MOLECULE=ON  # Model molecular systems with fixed covalent bonds
-          -D PKG_RIGID=ON     # Rigid constraints on collections of atoms or particles
-          -D PKG_KSPACE=ON    # Long-range electrostatic interaction
+          -D PKG_MOLECULE=ON # Model molecular systems with fixed covalent bonds
+          -D PKG_RIGID=ON    # Rigid constraints on collections of atoms or particles
+          -D PKG_KSPACE=ON   # Long-range electrostatic interaction
 
 Once ready, build and install LAMMPS as a shared library with Python:
 
@@ -147,7 +149,7 @@ For now, installing LAMMPS as a shared library with Python is not mandatory to u
 Examples
 --------
 
-Coming soon!
+Coming soon !
 
 
 Developments

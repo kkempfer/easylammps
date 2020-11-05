@@ -54,25 +54,39 @@ Supported structures
     writing are supported, allowing construction of a LAMMPS Data from
     scratch or modification of an existing one. Force-field coefficients
     can be read from LAMMPS input files. These can then be written back in
-    a LAMMPS data file or in a LAMMPS input file to be used with LAMMPS
-    `include` command.
+    a LAMMPS data file or in a LAMMPS input file that LAMMPS can open using
+    `read_data <https://lammps.sandia.gov/doc/read_data.html>`_ and
+    `include <https://lammps.sandia.gov/doc/include.html>`_ commands,
+    respectively.
   - **LAMMPS Log**, where thermodynamic data is printed. For now, only
     one-line summary is supported (most common use case). For more
-    information, see LAMMPS `thermo_style` and `thermo_modify` commands.
-  - **LAMMPS Dump**, where result from LAMMPS `dump custom` command
-    is written. This file contains the trajectory of atom attributes.
-  - **LAMMPS DumpLocal**, where result from LAMMPS `dump local` command
-    is written. This file contains the trajectory of local attributes
-    such as pairs, bonds, angles, dihedral angles and impropers. See
-    LAMMPS `compute property/local` command.
-  - **LAMMPS AveTime**, where result from LAMMPS `fix ave/time` command
-    is written.
-  - **LAMMPS AveCorrelate**, where result from LAMMPS `fix ave/correlate`
+    information, see LAMMPS
+    `thermo_style <https://lammps.sandia.gov/doc/thermo_style.html>`_
+    and `thermo_modify <https://lammps.sandia.gov/doc/thermo_modify.html>`_
+    commands.
+  - **LAMMPS Dump**, where result from LAMMPS
+    `dump <https://lammps.sandia.gov/doc/dump.html>`_ command using `custom`
+    (or equivalent argument) is written. This file contains the
+    trajectory of atom attributes, such as the atom coordinates.
+  - **LAMMPS DumpLocal**, where result from LAMMPS
+    `dump <https://lammps.sandia.gov/doc/dump.html>`_ command using `local`
+    (or equivalent argument) is written. This file contains the trajectory
+    of local attributes such as pairs, bonds, angles, dihedral angles and
+    impropers. See also LAMMPS
+    `compute property/local <https://lammps.sandia.gov/doc/compute_property_local.html>`_
+    command.
+  - **LAMMPS AveTime**, where result from LAMMPS
+    `fix ave/time <https://lammps.sandia.gov/doc/fix_ave_time.html>`_
     command is written.
-  - **LAMMPS AveChunk**, where result from LAMMPS `fix ave/chunk` command
-    is written.
-  - **LAMMPS AveHisto**, where result from LAMMPS `fix ave/histo` command
-    is written.
+  - **LAMMPS AveCorrelate**, where result from LAMMPS
+    `fix ave/correlate <https://lammps.sandia.gov/doc/fix_ave_correlate.html>`_
+    command is written.
+  - **LAMMPS AveChunk**, where result from LAMMPS
+    `fix ave/chunk <https://lammps.sandia.gov/doc/fix_ave_chunk.html>`_
+    command is written.
+  - **LAMMPS AveHisto**, where result from LAMMPS
+    `fix ave/histo <https://lammps.sandia.gov/doc/fix_ave_histo.html>`_
+    command is written.
 
 
 Get in touch
