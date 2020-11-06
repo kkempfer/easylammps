@@ -39,7 +39,7 @@ thermo_style      custom time etotal ke pe ebond eangle evdwl temp press vol den
 thermo            50
 
 # Trajectory
-dump              TRJ all custom 1000 dump.lammpstrj id mol type xu yu zu
+dump              TRJ all custom 500 dump.lammpstrj id mol type xu yu zu
 dump_modify       TRJ sort id
 
 
@@ -108,7 +108,7 @@ dump              dBOND all local 500 bond.dump c_BTYPE[*] c_BOND[*]
 compute           ATYPE all property/local atype
 compute           ANGLE all angle/local theta
 dump              dANGLE all local 500 angle.dump c_ATYPE[*] c_ANGLE[*]
-fix               hRG all ave/histo 1 1 500 0.0 50.0 50 c_RGMOLS[*] &
+fix               hRG all ave/histo 1 1 500 0.0 8.0 80 c_RGMOLS[*] &
                   mode vector ave running file gyration.histo overwrite
 
 # Green-Kubo zero-shear viscosity
@@ -194,13 +194,6 @@ variable          pzz delete
 variable          pyy delete
 variable          pxx delete
 
-unfix             ZMOM
-unfix             NVT
-
-
-###################################################
-### End Analysis ##################################
-
 unfix             hRG
 undump            dANGLE
 uncompute         ANGLE
@@ -208,6 +201,13 @@ uncompute         ATYPE
 undump            dBOND
 uncompute         BOND
 uncompute         BTYPE
+
+unfix             ZMOM
+unfix             NVT
+
+
+###################################################
+### End Analysis ##################################
 
 undump            TRJ
 
@@ -217,3 +217,61 @@ unfix             tRG
 variable          RG delete
 uncompute         RGMOLS
 uncompute         MOLS
+
+
+###################################################
+### End ###########################################
+
+write_data        end.data
+write_restart     end.restart
+
+
+###################################################
+### Post-treatment ################################
+
+variable          i loop 3
+label             looprdf
+
+clear
+
+# System (must be defined for rerun, it will be updated)
+read_restart      end.restart
+reset_timestep    0
+
+thermo_style      one
+thermo            0
+
+bond_style        zero nocoeff
+bond_coeff        *
+angle_style       zero nocoeff
+angle_coeff       *
+
+pair_style        zero 15.0 nocoeff
+pair_coeff        * *
+neighbor          0.0 bin
+neigh_modify      every 1 delay 0 check no
+neigh_modify      exclude none
+#neigh_modify      page 1000000 one 20000
+
+if                "$i == 1" then &
+                    "variable FILENAME index rdf.011.time" &
+                    "special_bonds lj 0.0 1.0 1.0"
+if                "$i == 2" then &
+                    "variable FILENAME index rdf.intra.011.time" &
+                    "special_bonds lj 0.0 1.0 1.0" &
+                    "neigh_modify exclude molecule/inter all"
+if                "$i == 3" then &
+                    "variable FILENAME index rdf.inter.time" &
+                    "special_bonds lj 0.0 0.0 0.0" &
+                    "neigh_modify exclude molecule/intra all"
+compute           RDF all rdf 150 1 1
+fix               tRDF all ave/time 1 1 500 c_RDF[*] &
+                  mode vector ave running file ${FILENAME} overwrite title3 "# Row Distance RDF CN"
+rerun             dump.lammpstrj first 50000 every 500 dump x y z wrapped no box yes replace yes
+unfix             tRDF
+uncompute         RDF
+variable          FILENAME delete
+
+next              i
+jump              SELF looprdf
+variable          i delete
