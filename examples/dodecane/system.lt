@@ -1,0 +1,9 @@
+import "dodecane.lt"
+
+DODECANE = new DODECANE[100]
+
+write_once("Data Boundary") {
+  0 38.0 xlo xhi
+  0 38.0 ylo yhi
+  0 38.0 zlo zhi
+}

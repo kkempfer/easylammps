@@ -1,11 +1,219 @@
-units             real
+###################################################
+### System ########################################
 
-atom_style        full
-bond_style        harmonic
-angle_style       cosine/squared
-pair_style        lj/gromacs 9.0 12.0
-special_bonds     lj 0.0 1.0 1.0
-neighbor          2.5 bin
-neigh_modify      delay 1 every 1 check yes
+include           system.in
 
-read_data         lammps.data
+variable          lx equal lx
+variable          lx0 equal ${lx}
+variable          lx delete
+variable          ly equal ly
+variable          ly0 equal ${ly}
+variable          ly delete
+variable          lz equal lz
+variable          lz0 equal ${lz}
+variable          lz delete
+variable          vol equal vol
+variable          vol0 equal ${vol}
+variable          vol delete
+
+
+###################################################
+### Minimize energy ###############################
+
+thermo            0
+min_style         cg
+minimize          1.0e-4 1.0e-6 100 1000
+
+
+###################################################
+### Analysis ######################################
+
+# Structural analysis
+compute           MOLS all chunk/atom molecule
+compute           RGMOLS all gyration/chunk MOLS
+variable          RG equal ave(c_RGMOLS)
+fix               tRG all ave/time 1 1 500 c_RGMOLS[*] mode vector ave one file gyration.time
+
+# Thermodynamics
+thermo_style      custom time etotal ke pe ebond eangle evdwl temp press vol density v_RG
+thermo            50
+
+# Trajectory
+dump              TRJ all custom 1000 dump.lammpstrj id mol type xu yu zu
+dump_modify       TRJ sort id
+
+
+###################################################
+### Equilibration NPT Dynamics ####################
+
+velocity          all create 293.0 2934
+
+timestep          20.0
+
+fix               NPT all npt temp 293.0 293.0 $(100.0*dt) iso 1.0 1.0 $(1000.0*dt)
+fix               ZMOM all momentum 5 linear 1 1 1 angular rescale
+
+run               20000
+
+
+###################################################
+### Average box size and change box ###############
+
+variable          vol equal vol
+fix               AVE all ave/time 1 1 1 v_vol mode scalar ave running
+
+run               20000
+
+variable          BOXSCALE equal ($(f_AVE)/${vol0})^(1.0/3)
+variable          vol0 delete
+unfix             AVE
+variable          vol delete
+unfix             ZMOM
+unfix             NPT
+variable          lx equal ${BOXSCALE}*${lx0}
+variable          lx0 delete
+variable          ly equal ${BOXSCALE}*${ly0}
+variable          ly0 delete
+variable          lz equal ${BOXSCALE}*${lz0}
+variable          lz0 delete
+variable          BOXSCALE delete
+change_box        all x final 0.0 ${lx} y final 0.0 ${ly} z final 0.0 ${lz} remap units box
+variable          lz delete
+variable          ly delete
+variable          lx delete
+
+
+###################################################
+### Equilibration NVT Dynamics ####################
+
+fix               NVT all nvt temp 293.0 293.0 $(100.0*dt)
+fix               ZMOM all momentum 5 linear 1 1 1 angular rescale
+
+run               10000
+
+unfix             ZMOM
+unfix             NVT
+
+
+###################################################
+### Production NVT Dynamics #######################
+
+fix               NVT all nvt temp 293.0 293.0 $(100.0*dt)
+fix               ZMOM all momentum 5 linear 1 1 1 angular rescale
+
+# Structural analysis
+compute           BTYPE all property/local btype
+compute           BOND all bond/local dist
+dump              dBOND all local 500 bond.dump c_BTYPE[*] c_BOND[*]
+compute           ATYPE all property/local atype
+compute           ANGLE all angle/local theta
+dump              dANGLE all local 500 angle.dump c_ATYPE[*] c_ANGLE[*]
+fix               hRG all ave/histo 1 1 500 0.0 50.0 50 c_RGMOLS[*] &
+                  mode vector ave running file gyration.histo overwrite
+
+# Green-Kubo zero-shear viscosity
+variable          pxx equal pxx
+variable          pyy equal pyy
+variable          pzz equal pzz
+variable          nxx equal pxx-press
+variable          nyy equal pyy-press
+variable          nzz equal pzz-press
+variable          pxy equal pxy
+variable          pxz equal pxz
+variable          pyz equal pyz
+fix               tP all ave/time 1 1 1 v_pxx v_pyy v_pzz v_pxy v_pxz v_pyz &
+                  mode scalar ave one file pressure.time
+                  # Write pressure tensor to compute auto-correlation as a post-treatment (heavy file)
+fix               PACF all ave/correlate 1 50000 50000 v_nxx v_nyy v_nzz v_pxy v_pxz v_pyz &
+                  type auto ave running file P0Pt.correlate overwrite
+                  # Write auto-correlation of the pressure tensor to compute cumulative integral,
+                  # i.e. instantaneous viscosity, as a post-treatment (heavy file)
+variable          etaxx equal trap(f_PACF[3])*1*dt*vol/293.0
+variable          etayy equal trap(f_PACF[4])*1*dt*vol/293.0
+variable          etazz equal trap(f_PACF[5])*1*dt*vol/293.0
+variable          etaxy equal trap(f_PACF[6])*1*dt*vol/293.0
+variable          etaxz equal trap(f_PACF[7])*1*dt*vol/293.0
+variable          etayz equal trap(f_PACF[8])*1*dt*vol/293.0
+variable          eta equal (v_etaxy+v_etaxz+v_etayz)/3
+variable          etadc equal ((v_etaxx+v_etayy+v_etazz)+2*(v_etaxy+v_etaxz+v_etayz))/10
+                  # Double contraction of the auto-correlation of the traceless symmetric pressure tensor
+fix               tE all ave/time 1 1 50000 v_etaxy v_etaxz v_etayz v_eta v_etadc &
+                  mode scalar ave one file viscosity.time
+
+# Green-Kubo thermal conductivity
+compute           KE all ke/atom
+compute           PE all pe/atom
+compute           SV all stress/atom NULL virial
+compute           H all heat/flux KE PE SV
+fix               tH all ave/time 1 1 1 c_H[1] c_H[2] c_H[3] &
+                  mode scalar ave one file heatflux.time
+                  # Write heat flux components to compute auto-correlation as a post-treatment (heavy file)
+fix               HACF all ave/correlate 1 50000 50000 c_H[1] c_H[2] c_H[3] &
+                  type auto ave running file H0Ht.correlate overwrite
+                  # Write auto-correlation of the heat flux components to compute cumulative integral,
+                  # i.e. instantaneous thermal conductivity, as a post-treatment (heavy file)
+variable          kxx equal trap(f_HACF[3])/1*dt/(vol*293.0*293.0)
+variable          kyy equal trap(f_HACF[4])/1*dt/(vol*293.0*293.0)
+variable          kzz equal trap(f_HACF[5])/1*dt/(vol*293.0*293.0)
+variable          kappa equal (v_kxx+v_kyy+v_kzz)/3
+fix               tK all ave/time 1 1 50000 v_kxx v_kyy v_kzz v_kappa &
+                  mode scalar ave one file thermalconductivity.time
+
+run               100000
+
+unfix             tK
+variable          kappa delete
+variable          kzz delete
+variable          kyy delete
+variable          kxx delete
+unfix             HACF
+unfix             tH
+uncompute         H
+uncompute         SV
+uncompute         PE
+uncompute         KE
+
+unfix             tE
+variable          etadc delete
+variable          eta delete
+variable          etayz delete
+variable          etaxz delete
+variable          etaxy delete
+variable          etazz delete
+variable          etayy delete
+variable          etaxx delete
+unfix             PACF
+unfix             tP
+variable          pyz delete
+variable          pxz delete
+variable          pxy delete
+variable          nzz delete
+variable          nyy delete
+variable          nxx delete
+variable          pzz delete
+variable          pyy delete
+variable          pxx delete
+
+unfix             ZMOM
+unfix             NVT
+
+
+###################################################
+### End Analysis ##################################
+
+unfix             hRG
+undump            dANGLE
+uncompute         ANGLE
+uncompute         ATYPE
+undump            dBOND
+uncompute         BOND
+uncompute         BTYPE
+
+undump            TRJ
+
+thermo_style      custom time etotal ke pe ebond eangle evdwl temp press vol density
+
+unfix             tRG
+variable          RG delete
+uncompute         RGMOLS
+uncompute         MOLS

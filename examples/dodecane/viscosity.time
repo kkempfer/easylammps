@@ -1,0 +1,4 @@
+# Time-averaged data for fix tE
+# TimeStep v_etaxy v_etaxz v_etayz v_eta v_etadc
+100000 1.48099e+09 8.95706e+09 6.02125e+09 5.48643e+09 4.80651e+09
+150000 -2.98408e+08 1.07901e+09 1.28822e+09 6.89607e+08 7.63176e+08

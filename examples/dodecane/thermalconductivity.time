@@ -1,0 +1,4 @@
+# Time-averaged data for fix tK
+# TimeStep v_kxx v_kyy v_kzz v_kappa
+100000 1.57738e-08 9.98783e-09 3.93574e-09 9.89912e-09
+150000 8.2493e-09 -2.29225e-10 4.36855e-09 4.12954e-09
