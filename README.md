@@ -79,12 +79,11 @@ Prepare the building directory and run `cmake` with at least these options:
 
     mkdir build-python
     cd build-python
-    cmake -D PKG_PYTHON=ON
-          -D BUILD_LIB=ON
-          -D BUILD_SHARED_LIBS=ON
-          -D CMAKE_INSTALL_PREFIX=$CONDA_PREFIX
-          -D PYTHON_EXECUTABLE=$CONDA_PREFIX/bin/python
-          -D LAMMPS_EXCEPTIONS=ON
+    cmake -D BUILD_SHARED_LIBS=ON \
+          -D LAMMPS_EXCEPTIONS=ON \
+          -D PKG_PYTHON=ON \
+          -D PYTHON_EXECUTABLE=$CONDA_PREFIX/bin/python \
+          -D CMAKE_INSTALL_PREFIX=$CONDA_PREFIX \
           ../cmake
 
 More options to add in `cmake` are available [here](https://lammps.sandia.gov/doc/Build.html). Among them, some useful ones are presented here:
