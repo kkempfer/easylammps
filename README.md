@@ -75,15 +75,17 @@ Use the virtual Python environment where `easylammps` is installed (recommended)
 
     conda activate lammps
 
-Prepare the building directory and run `cmake` with at least these options:
+Prepare the building directory and run `cmake` with at least these options (replace pythonX.Y by your python version):
 
     mkdir build-python
     cd build-python
     cmake -D BUILD_SHARED_LIBS=ON \
           -D LAMMPS_EXCEPTIONS=ON \
           -D PKG_PYTHON=ON \
-          -D PYTHON_EXECUTABLE=$CONDA_PREFIX/bin/python \
           -D CMAKE_INSTALL_PREFIX=$CONDA_PREFIX \
+          -D PYTHON_EXECUTABLE=$CONDA_PREFIX/bin/python \
+          -D PYTHON_INCLUDE_DIR=$CONDA_PREFIX/include/pythonX.Y \
+          -D PYTHON_LIBRARY=$CONDA_PREFIX/lib/libpythonX.Y.so \
           ../cmake
 
 More options to add in `cmake` are available [here](https://lammps.sandia.gov/doc/Build.html). Among them, some useful ones are presented here:
