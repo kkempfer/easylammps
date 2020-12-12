@@ -8,6 +8,7 @@ import gzip
 import itertools
 import pandas as pd
 import numpy as np
+import multiprocessing
 
 
 class DumpLocal(object):
@@ -253,8 +254,8 @@ class DumpLocal(object):
                     d[name] = df[["Coord", "Count"]]
 
         # Do not forget to close all processes
-        pool.terminate()
         pool.close()
+        pool.join()
 
         names = list(d.keys())
         dfs = list(d.values())
