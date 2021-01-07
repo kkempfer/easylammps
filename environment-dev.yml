@@ -1,0 +1,11 @@
+name: easylammps-dev
+channels:
+  - defaults
+dependencies:
+  - conda-build
+  - anaconda::pytest
+  - conda-forge::conda-merge
+  - anaconda::flake8
+  - conda-forge::flake8-docstrings
+  - anaconda::black
+  - conda-forge::python-language-server

@@ -1,0 +1,6 @@
+-e .
+pytest
+flake8
+flake8-docstrings
+black
+python-language-server
