@@ -1,11 +1,9 @@
-EasyLAMMPS
-==========
+# EasyLAMMPS
 
 A user-friendly Python package to manipulate input and output files of Large-scale Atomic/Molecular Massively Parallel Simulator [LAMMPS](https://lammps.sandia.gov/) molecular dynamics code. One Python class per LAMMPS file type. Includes conversion into [`pandas.DataFrame`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html) objects.
 
 
-Installation
-------------
+## Installation
 
 Create and activate a virtual Python environment (recommended) with the name `lammps`, for example using [Anaconda](https://anaconda.org/) package and environment manager:
 
@@ -22,8 +20,7 @@ Install `easylammps` and its dependencies:
     pip install .
 
 
-Dependencies
-------------
+## Dependencies
 
 Required:
 
@@ -36,8 +33,7 @@ Recommended:
 * [matplotlib](https://matplotlib.org/) Visualization
 
 
-Build the documentation (optional)
-----------------------------------
+## Build the documentation (optional)
 
 Enter to the documentation directory:
 
@@ -59,8 +55,7 @@ Deactivate your virtual Python environment:
 Access the documentation in the build/html directory.
 
 
-Install LAMMPS as a shared library with Python (optional)
----------------------------------------------------------
+## Install LAMMPS as a shared library with Python (optional)
 
 Coupling [Python with LAMMPS]([https://lammps.sandia.gov/doc/Python_head.html) opens the door to many advanced extensions. Fortunately, the `lammps` Python library already wraps the [LAMMPS C-library interface](https://lammps.sandia.gov/doc/Python_module.html). Here, we propose a quick installation guide.
 
@@ -147,14 +142,12 @@ For now, installing LAMMPS as a shared library with Python is not mandatory to u
 ---
 
 
-Examples
---------
+## Examples
 
 Coming soon !
 
 
-Developments
-------------
+## Developments
 
 * Use of [black](https://black.readthedocs.io/) to auto-format Python code
 * Use of [sphinx](https://www.sphinx-doc.org/) to auto-build documentation based on Python docstrings
@@ -164,21 +157,18 @@ Developments
 * Add Restart object to read LAMMPS restart file ?
 
 
-License
--------
+## License
 
-EasyLAMMPS is licensed under the AGPL-3.0 license. See the LICENSE file for a full description.
+EasyLAMMPS is licensed under the GNU Affero General Public License v3 license. See the LICENSE file for a full description.
 
 
-Acknowledgements
-----------------
+## Acknowledgements
 
 I kindly thank Julien Devémy who introduced me to the Python programming language. Part of the code used to write `easylammps` as been taken and modified from his [`lammps-tools`](https://github.com/jdevemy/lammps-tools/) package.
 
 I gratefully acknowledge Alain Dequidt for his inspiring ideas in scientific computing.
 
 
-Get in touch
-------------
+## Get in touch
 
 Please send bug reports, ideas and questions [on GitHub](https://github.com/kkempfer/easylammps/).
