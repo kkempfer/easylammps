@@ -146,15 +146,17 @@ For now, installing LAMMPS as a shared library with Python is not mandatory to u
 
 Coming soon !
 
+* Add [jupyter](https://jupyter.org/) notebooks tutorials
+
 
 ## Developments
 
+* Use of [flake8](https://flake8.pycqa.org/) linter and [flake8-docstrings](https://pypi.org/project/flake8-docstrings/) extension to check Python code syntax
 * Use of [black](https://black.readthedocs.io/) to auto-format Python code
+* Use of [pytest](https://docs.pytest.org/) for testing
 * Use of [sphinx](https://www.sphinx-doc.org/) to auto-build documentation based on Python docstrings
-* Add [jupyter](https://jupyter.org/) notebooks tutorials
-* Add [pytest](https://docs.pytest.org/) (or equivalent)
-* Add Input object to read LAMMPS input file ?
-* Add Restart object to read LAMMPS restart file ?
+* Add InputTools object to read LAMMPS input file ?
+* Add RestartTools object to read LAMMPS restart file ?
 
 
 ## License
