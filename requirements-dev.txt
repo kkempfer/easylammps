@@ -1,6 +1,5 @@
--e .
-pytest
 flake8
 flake8-docstrings
 black
+pytest
 python-language-server
