@@ -9,8 +9,8 @@ DESCRIPTION = "Python tools for LAMMPS"
 LONG_DESCRIPTION = """
 A user-friendly Python package to manipulate input and output files of LAMMPS
 molecular dynamics code. One Python class per LAMMPS file type. Include
-conversion into pandas DataFrame for quick and easy access to LAMMPS data
-within Python.
+conversion into pandas DataFrame for quick and easy access to LAMMPS
+information within Python.
 """
 URL = "https://github.com/kkempfer/easylammps"
 CLASSIFIERS = [

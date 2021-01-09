@@ -1,6 +1,6 @@
 # EasyLAMMPS
 
-A user-friendly Python package to manipulate input and output files of Large-scale Atomic/Molecular Massively Parallel Simulator [LAMMPS](https://lammps.sandia.gov/) molecular dynamics code. One Python class per LAMMPS file type. Includes conversion into [`pandas.DataFrame`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html) objects.
+A user-friendly Python package to manipulate input and output files of Large-scale Atomic/Molecular Massively Parallel Simulator [LAMMPS](https://lammps.sandia.gov/) molecular dynamics code. One Python class per LAMMPS file type. Include conversion into [`pandas.DataFrame`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html) objects.
 
 
 ## Installation
