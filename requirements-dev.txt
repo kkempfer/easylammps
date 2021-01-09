@@ -1,5 +1,21 @@
+# required
+networkx
+numpy
+pandas
+# development tools
+conda-build
+conda-merge
+# code checks
 flake8
 flake8-docstrings
+flake8-comprehensions
 black
+flake8-black
+# testing
 pytest
+# documentation
+m2r
+sphinx
+sphinx_rtd_theme
+# atom editor ide-python
 python-language-server

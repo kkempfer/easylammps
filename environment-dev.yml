@@ -1,11 +1,25 @@
 name: easylammps-dev
 channels:
-  - defaults
+  - conda-forge
 dependencies:
+  # required
+  - networkx
+  - numpy
+  - pandas
+  # development tools
   - conda-build
-  - anaconda::pytest
-  - conda-forge::conda-merge
-  - anaconda::flake8
-  - conda-forge::flake8-docstrings
-  - anaconda::black
-  - conda-forge::python-language-server
+  - conda-merge
+  # code checks
+  - flake8
+  - flake8-docstrings
+  - flake8-comprehensions
+  - black
+  - flake8-black
+  # testing
+  - pytest
+  # documentation
+  - m2r
+  - sphinx
+  - sphinx_rtd_theme
+  # atom editor ide-python
+  - python-language-server
