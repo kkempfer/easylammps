@@ -1,7 +1,4 @@
-# -*- coding: iso-8859-1 -*-
-"""
-Python library to manage LAMMPS Dump file.
-"""
+"""Python library to manage LAMMPS Dump file."""
 
 import io
 import gzip
@@ -37,7 +34,7 @@ class Dump(object):
     """
 
     def __init__(
-        self, filename="dump.lammpstrj", raw=True, pandas=True, sort=True, data=None
+        self, filename="dump.lammpstrj", raw=True, pandas=True, sort=True, data=None,
     ):
 
         self.filename = filename
@@ -199,11 +196,7 @@ class Dump(object):
             )
             if sort:
                 if "id" not in fields:
-                    raise KeyError(
-                        "Cannot sort atoms, id field not found in LAMMPS Dump file {:s}".format(
-                            self.filename
-                        )
-                    )
+                    raise KeyError("Cannot sort atoms, id field not found in fields")
                 atoms.sort_values("id", inplace=True)
 
         # Atoms is a list of dictionnaries
@@ -224,11 +217,7 @@ class Dump(object):
                 atoms.append(atom)
             if sort:
                 if "id" not in fields:
-                    raise KeyError(
-                        "Cannot sort atoms, id field not found in LAMMPS Dump file {:s}".format(
-                            self.filename
-                        )
-                    )
+                    raise KeyError("Cannot sort atoms, id field not found in fields")
                 atoms.sort(key=lambda atom: atom["id"])
 
         return atoms

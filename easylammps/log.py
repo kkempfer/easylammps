@@ -1,7 +1,4 @@
-# -*- coding: iso-8859-1 -*-
-"""
-Python library to manage LAMMPS Log file.
-"""
+"""Python library to manage LAMMPS Log file."""
 
 import logging
 import gzip
@@ -13,7 +10,8 @@ class Log(object):
     LAMMPS Log file reader.
 
     Iterator over each configuration written in LAMMPS Log file. The latter
-    can directly be converted into a pandas DataFrame using `to_pandas()` method.
+    can directly be converted into a pandas DataFrame using `to_pandas()`
+    method.
 
     Parameters
     ----------
@@ -120,10 +118,8 @@ class Log(object):
         return conf
 
     def seek_next_run(self):
-        """
-        Seek to next run and set both `fields` and `current_run` attributes.
-        """
-        for i, line in enumerate(self.f):
+        """Seek to next run and set `fields` and `current_run` attributes."""
+        for line in self.f:
             if line.startswith("WARNING"):
                 logging.warning(line.strip())
                 continue

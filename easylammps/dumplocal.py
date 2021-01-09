@@ -1,13 +1,11 @@
-# -*- coding: iso-8859-1 -*-
-"""
-Python library to manage LAMMPS DumpLocal file.
-"""
+"""Python library to manage LAMMPS DumpLocal file."""
 
 import io
 import gzip
 import itertools
 import pandas as pd
 import numpy as np
+import functools
 import multiprocessing
 
 
@@ -16,8 +14,8 @@ class DumpLocal(object):
     LAMMPS DumpLocal file reader.
 
     Iterator over each configuration written in LAMMPS DumpLocal file.
-    Grouped averaged histograms of a field of the iterator can be computed, that
-    effectively corresponds to the `average one` option in LAMMPS.
+    Grouped averaged histograms of a field of the iterator can be computed,
+    that effectively corresponds to the `average one` option in LAMMPS.
 
     Parameters
     ----------
@@ -205,7 +203,7 @@ class DumpLocal(object):
         return entries
 
     def to_hist(
-        self, processes=1, groupby=None, field=None, bins=10, _range=None, norm=True
+        self, processes=1, groupby=None, field=None, bins=10, _range=None, norm=True,
     ):
         """
         Compute grouped averaged histograms of a field.

@@ -1,7 +1,4 @@
-# -*- coding: iso-8859-1 -*-
-"""
-Python library to manage LAMMPS AveHisto file.
-"""
+"""Python library to manage LAMMPS AveHisto file."""
 
 import logging
 import gzip

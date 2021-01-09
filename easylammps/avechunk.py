@@ -1,7 +1,4 @@
-# -*- coding: iso-8859-1 -*-
-"""
-Python library to manage LAMMPS AveChunk file.
-"""
+"""Python library to manage LAMMPS AveChunk file."""
 
 import gzip
 import pandas as pd
@@ -11,9 +8,9 @@ class AveChunk(object):
     """
     LAMMPS AveChunk file reader.
 
-    Iterator over each profile average written in LAMMPS AveChunk file, obtained
-    using `fix ave/chunk` command. The latter can directly be converted into
-    a pandas DataFrame using `to_pandas()` method.
+    Iterator over each profile average written in LAMMPS AveChunk file,
+    obtained using `fix ave/chunk` command. The latter can directly be
+    converted into a pandas DataFrame using `to_pandas()` method.
 
     Parameters
     ----------
@@ -57,7 +54,7 @@ class AveChunk(object):
         # Read the second line header
         line = self.f.readline()
         if line.strip() != "# Timestep Number-of-chunks Total-count":
-            # For some reason, TimeStep is written Timestep by default (typography mistake)
+            # TimeStep is written Timestep by default (typography mistake)
             raise ValueError(
                 "File {:s} does not seem to be a valid LAMMPS AveChunk file".format(
                     self.filename

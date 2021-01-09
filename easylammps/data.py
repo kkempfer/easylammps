@@ -1,7 +1,4 @@
-# -*- coding: iso-8859-1 -*-
-"""
-Python library to manage LAMMPS Data object.
-"""
+"""Python library to manage LAMMPS Data object."""
 
 import logging
 import itertools
@@ -190,11 +187,14 @@ class Data(object):
         try:
             self.atom_types[i - 1] = atom_type
         except IndexError:
-            # There are holes in the list, grow list (holes will be None and will be removed after)
+            # There are holes in the list, grow list
+            # (holes will be None and will be removed after)
             self.atom_types.extend([None] * (i - len(self.atom_types)))
             self.atom_types[i - 1] = atom_type
 
-    def add_pair_type(self, atom_type_is, coeffs=None, style=None, comment=None):
+    def add_pair_type(
+        self, atom_type_is, coeffs=None, style=None, comment=None,
+    ):
         """
         Add a pair type to the list.
 
@@ -247,7 +247,8 @@ class Data(object):
         try:
             self.bond_types[i - 1] = bond_type
         except IndexError:
-            # There are holes in the list, grow list (holes will be None and will be removed after)
+            # There are holes in the list, grow list
+            # (holes will be None and will be removed after)
             self.bond_types.extend([None] * (i - len(self.bond_types)))
             self.bond_types[i - 1] = bond_type
 
@@ -275,7 +276,8 @@ class Data(object):
         try:
             self.angle_types[i - 1] = angle_type
         except IndexError:
-            # There are holes in the list, grow list (holes will be None and will be removed after)
+            # There are holes in the list, grow list
+            # (holes will be None and will be removed after)
             self.angle_types.extend([None] * (i - len(self.angle_types)))
             self.angle_types[i - 1] = angle_type
 
@@ -303,7 +305,8 @@ class Data(object):
         try:
             self.dihedral_types[i - 1] = dihedral_type
         except IndexError:
-            # There are holes in the list, grow list (holes will be None and will be removed after)
+            # There are holes in the list, grow list
+            # (holes will be None and will be removed after)
             self.dihedral_types.extend([None] * (i - len(self.dihedral_types)))
             self.dihedral_types[i - 1] = dihedral_type
 
@@ -331,7 +334,8 @@ class Data(object):
         try:
             self.improper_types[i - 1] = improper_type
         except IndexError:
-            # There are holes in the list, grow list (holes will be None and will be removed after)
+            # There are holes in the list, grow list
+            # (holes will be None and will be removed after)
             self.improper_types.extend([None] * (i - len(self.improper_types)))
             self.improper_types[i - 1] = improper_type
 
@@ -388,7 +392,14 @@ class Data(object):
         """
         if i is None:
             i = len(self.atoms) + 1
-        atom = {"i": i, "mol_i": mol_i, "atom_type": atom_type, "x": x, "y": y, "z": z}
+        atom = {
+            "i": i,
+            "mol_i": mol_i,
+            "atom_type": atom_type,
+            "x": x,
+            "y": y,
+            "z": z,
+        }
         if charge is not None:
             atom["charge"] = charge
         if nx is not None:
@@ -409,7 +420,8 @@ class Data(object):
         try:
             self.atoms[i - 1] = atom
         except IndexError:
-            # There are holes in the list, grow list (holes will be None and will be removed after)
+            # There are holes in the list, grow list
+            # (holes will be None and will be removed after)
             self.atoms.extend([None] * (i - len(self.atoms)))
             self.atoms[i - 1] = atom
 
@@ -440,7 +452,8 @@ class Data(object):
         try:
             self.bonds[i - 1] = bond
         except IndexError:
-            # There are holes in the list, grow list (holes will be None and will be removed after)
+            # There are holes in the list, grow list
+            # (holes will be None and will be removed after)
             self.bonds.extend([None] * (i - len(self.bonds)))
             self.bonds[i - 1] = bond
 
@@ -478,7 +491,8 @@ class Data(object):
         try:
             self.angles[i - 1] = angle
         except IndexError:
-            # There are holes in the list, grow list (holes will be None and will be removed after)
+            # There are holes in the list, grow list
+            # (holes will be None and will be removed after)
             self.angles.extend([None] * (i - len(self.angles)))
             self.angles[i - 1] = angle
 
@@ -518,7 +532,8 @@ class Data(object):
         try:
             self.dihedrals[i - 1] = dihedral
         except IndexError:
-            # There are holes in the list, grow list (holes will be None and will be removed after)
+            # There are holes in the list, grow list
+            # (holes will be None and will be removed after)
             self.dihedrals.extend([None] * (i - len(self.dihedrals)))
             self.dihedrals[i - 1] = dihedral
 
@@ -558,14 +573,13 @@ class Data(object):
         try:
             self.impropers[i - 1] = improper
         except IndexError:
-            # There are holes in the list, grow list (holes will be None and will be removed after)
+            # There are holes in the list, grow list
+            # (holes will be None and will be removed after)
             self.impropers.extend([None] * (i - len(self.impropers)))
             self.impropers[i - 1] = improper
 
     def remove_holes(self):
-        """
-        Remove holes (None).
-        """
+        """Remove holes (None)."""
         if None in self.atom_types:
             self.atom_types = [
                 atom_type for atom_type in self.atom_types if atom_type is not None
@@ -607,7 +621,7 @@ class Data(object):
 
     def read_from_file(self, filename="lammps.data"):
         """
-        Constructor from LAMMPS data file.
+        Construct LAMMPS Data from file.
 
         Parameters
         ----------
@@ -907,7 +921,7 @@ class Data(object):
                     bond_type = self.bond_types[bond_type_i - 1]
 
                 self.add_bond(
-                    (atom1_i, atom2_i), i=i, bond_type=bond_type, comment=comment
+                    (atom1_i, atom2_i), i=i, bond_type=bond_type, comment=comment,
                 )
 
             # Angles
@@ -1720,7 +1734,7 @@ class Data(object):
     def write_dihedral_coeffs_to_file(self, filename="dihedral.coeffs"):
         """
         Write dihedral coefficients to a LAMMPS input file.
-        
+
         Parameters
         ----------
         filename : str, default 'dihedral.coeffs'
@@ -1871,9 +1885,7 @@ class Data(object):
         return G
 
     def reset_mol_i(self):
-        """
-        Reset all molecule indices in atom list by checking bond topology.
-        """
+        """Reset all molecule indices in atom list by checking bond topology."""
         for atom in self.atoms:
             atom["mol_i"] = None
 

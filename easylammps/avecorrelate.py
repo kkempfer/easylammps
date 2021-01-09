@@ -1,7 +1,4 @@
-# -*- coding: iso-8859-1 -*-
-"""
-Python library to manage LAMMPS AveCorrelate file.
-"""
+"""Python library to manage LAMMPS AveCorrelate file."""
 
 import gzip
 import pandas as pd
@@ -11,10 +8,10 @@ class AveCorrelate(object):
     """
     LAMMPS AveCorrelate file reader.
 
-    Iterator over each correlation average written in LAMMPS AveCorrelate file, obtained
-    using `fix ave/correlate` and `fix ave/correlate/long` commands. The latter can directly
-    be converted into a pandas DataFrame using `to_pandas()` method.
-
+    Iterator over each correlation average written in LAMMPS AveCorrelate file,
+    obtained using `fix ave/correlate` and `fix ave/correlate/long` commands.
+    The latter can directly be converted into a pandas DataFrame using
+    `to_pandas()` method.
 
     Parameters
     ----------

@@ -1,7 +1,4 @@
-# -*- coding: iso-8859-1 -*-
-"""
-Python library to manage LAMMPS AveTime file.
-"""
+"""Python library to manage LAMMPS AveTime file."""
 
 import gzip
 import pandas as pd
