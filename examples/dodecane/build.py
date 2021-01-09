@@ -1,14 +1,12 @@
 #!/usr/bin/env python
-# -*- coding: iso-8859-1 -*-
-"""System builder"""
+"""System builder."""
 
-import os
+import sys
 import easylammps
 
 
 def get_formatted_command_line(args):
-    """Return formatted LAMMPS Input command line"""
-
+    """Return formatted LAMMPS Input command line."""
     if args == []:
         cmd = "\n"
     elif len(args) == 1:
@@ -23,8 +21,7 @@ def get_formatted_command_line(args):
 
 
 def get_formatted_command_lines(args_list):
-    """Return formatted LAMMPS Input command lines"""
-
+    """Return formatted LAMMPS Input command lines."""
     cmds = []
     for args in args_list:
         cmd = get_formatted_command_line(args)
@@ -33,7 +30,7 @@ def get_formatted_command_lines(args_list):
 
 
 def main():
-    """Main function"""
+    """Format LAMMPS data and input file."""
 
     data = easylammps.Data("system.data")
 
@@ -49,7 +46,7 @@ def main():
 
     data.write_to_file(data.filename, write_coeffs=True)
 
-    # Format LAMMPS Input file
+    # Format LAMMPS input file
     args_list = []
     with open("system.in.init", "r") as f:
         args_list += [line.split() for line in f.readlines()]
