@@ -34,7 +34,12 @@ class Dump(object):
     """
 
     def __init__(
-        self, filename="dump.lammpstrj", raw=True, pandas=True, sort=True, data=None,
+        self,
+        filename="dump.lammpstrj",
+        raw=True,
+        pandas=True,
+        sort=True,
+        data=None,
     ):
 
         self.filename = filename

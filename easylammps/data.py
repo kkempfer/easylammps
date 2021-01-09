@@ -193,7 +193,11 @@ class Data(object):
             self.atom_types[i - 1] = atom_type
 
     def add_pair_type(
-        self, atom_type_is, coeffs=None, style=None, comment=None,
+        self,
+        atom_type_is,
+        coeffs=None,
+        style=None,
+        comment=None,
     ):
         """
         Add a pair type to the list.
@@ -921,7 +925,10 @@ class Data(object):
                     bond_type = self.bond_types[bond_type_i - 1]
 
                 self.add_bond(
-                    (atom1_i, atom2_i), i=i, bond_type=bond_type, comment=comment,
+                    (atom1_i, atom2_i),
+                    i=i,
+                    bond_type=bond_type,
+                    comment=comment,
                 )
 
             # Angles
@@ -1404,7 +1411,7 @@ class Data(object):
                 if pair_type["atom_type_1"]["i"] == pair_type["atom_type_2"]["i"]
             ] != []:
                 f.write("Pair Coeffs")
-                nb_styles = len(set([d["style"] for d in self.pair_types]))
+                nb_styles = len({d["style"] for d in self.pair_types})
                 if nb_styles == 1:
                     style = self.pair_types[0]["style"]
                     if style is not None:
@@ -1430,7 +1437,7 @@ class Data(object):
                 if pair_type["atom_type_1"]["i"] != pair_type["atom_type_2"]["i"]
             ] != []:
                 f.write("PairIJ Coeffs")
-                nb_styles = len(set([d["style"] for d in self.pair_types]))
+                nb_styles = len({d["style"] for d in self.pair_types})
                 if nb_styles == 1:
                     style = self.pair_types[0]["style"]
                     if style is not None:
@@ -1456,7 +1463,7 @@ class Data(object):
             # Bond Coeffs
             if self.bond_types != []:
                 f.write("Bond Coeffs")
-                nb_styles = len(set([d["style"] for d in self.bond_types]))
+                nb_styles = len({d["style"] for d in self.bond_types})
                 if nb_styles == 1:
                     style = self.bond_types[0]["style"]
                     if style is not None:
@@ -1476,7 +1483,7 @@ class Data(object):
             # Angle Coeffs
             if self.angle_types != []:
                 f.write("Angle Coeffs")
-                nb_styles = len(set([d["style"] for d in self.angle_types]))
+                nb_styles = len({d["style"] for d in self.angle_types})
                 if nb_styles == 1:
                     style = self.angle_types[0]["style"]
                     if style is not None:
@@ -1496,7 +1503,7 @@ class Data(object):
             # Dihedral Coeffs
             if self.dihedral_types != []:
                 f.write("Dihedral Coeffs")
-                nb_styles = len(set([d["style"] for d in self.dihedral_types]))
+                nb_styles = len({d["style"] for d in self.dihedral_types})
                 if nb_styles == 1:
                     style = self.dihedral_types[0]["style"]
                     if style is not None:
@@ -1516,7 +1523,7 @@ class Data(object):
             # Improper Coeffs
             if self.improper_types != []:
                 f.write("Improper Coeffs")
-                nb_styles = len(set([d["style"] for d in self.improper_types]))
+                nb_styles = len({d["style"] for d in self.improper_types})
                 if nb_styles == 1:
                     style = self.improper_types[0]["style"]
                     if style is not None:
@@ -1653,7 +1660,7 @@ class Data(object):
 
         f = open(filename, "w")
 
-        nb_styles = len(set([d["style"] for d in self.pair_types]))
+        nb_styles = len({d["style"] for d in self.pair_types})
         for pair_type in self.pair_types:
             f.write(
                 "pair_coeff {:4d} {:4d}".format(
@@ -1687,7 +1694,7 @@ class Data(object):
 
         f = open(filename, "w")
 
-        nb_styles = len(set([d["style"] for d in self.bond_types]))
+        nb_styles = len({d["style"] for d in self.bond_types})
         for bond_type in self.bond_types:
             f.write("bond_coeff {:4d}".format(bond_type["i"]))
             if nb_styles > 1:
@@ -1717,7 +1724,7 @@ class Data(object):
 
         f = open(filename, "w")
 
-        nb_styles = len(set([d["style"] for d in self.angle_types]))
+        nb_styles = len({d["style"] for d in self.angle_types})
         for angle_type in self.angle_types:
             f.write("angle_coeff {:4d}".format(angle_type["i"]))
             if nb_styles > 1:
@@ -1747,7 +1754,7 @@ class Data(object):
 
         f = open(filename, "w")
 
-        nb_styles = len(set([d["style"] for d in self.dihedral_types]))
+        nb_styles = len({d["style"] for d in self.dihedral_types})
         for dihedral_type in self.dihedral_types:
             f.write("dihedral_coeff {:4d}".format(dihedral_type["i"]))
             if nb_styles > 1:
@@ -1777,7 +1784,7 @@ class Data(object):
 
         f = open(filename, "w")
 
-        nb_styles = len(set([d["style"] for d in self.improper_types]))
+        nb_styles = len({d["style"] for d in self.improper_types})
         for improper_type in self.improper_types:
             f.write("improper_coeff {:4d}".format(improper_type["i"]))
             if nb_styles > 1:
@@ -1885,7 +1892,7 @@ class Data(object):
         return G
 
     def reset_mol_i(self):
-        """Reset all molecule indices in atom list by checking bond topology."""
+        """Reset all molecule indices by checking bond topology."""
         for atom in self.atoms:
             atom["mol_i"] = None
 

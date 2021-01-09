@@ -203,7 +203,13 @@ class DumpLocal(object):
         return entries
 
     def to_hist(
-        self, processes=1, groupby=None, field=None, bins=10, _range=None, norm=True,
+        self,
+        processes=1,
+        groupby=None,
+        field=None,
+        bins=10,
+        _range=None,
+        norm=True,
     ):
         """
         Compute grouped averaged histograms of a field.
