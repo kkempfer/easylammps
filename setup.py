@@ -32,7 +32,6 @@ setup(
     long_description=LONG_DESCRIPTION,
     url=URL,
     classifiers=CLASSIFIERS,
-    packages=find_packages("easylammps"),
-    package_dir={"": "easylammps"},
+    packages=find_packages(include=["easylammps", "easylammps.*"]),
     install_requires=["networkx", "numpy", "pandas"],
 )
