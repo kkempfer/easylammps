@@ -34,4 +34,5 @@ setup(
     classifiers=CLASSIFIERS,
     packages=find_packages(include=["easylammps", "easylammps.*"]),
     install_requires=["networkx", "numpy", "pandas"],
+    extras_require={"test": ["pytest"]},
 )
