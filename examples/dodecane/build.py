@@ -2,7 +2,8 @@
 """System builder."""
 
 import sys
-import easylammps
+from pathlib import Path
+from easylammps import Data
 
 
 def get_formatted_command_line(args):
@@ -31,12 +32,9 @@ def get_formatted_command_lines(args_list):
 
 def main():
     """Format LAMMPS data and input file."""
-
-    data = easylammps.Data("system.data")
-
+    data = Data("system.data")
     # Add header to LAMMPS Data file
     data.header = "DODECANE[100]"
-
     # Add all types and comment
     data.atom_types[0]["comment"] = "C1"
     data.read_pair_coeffs_from_file("system.in.settings")
@@ -54,8 +52,7 @@ def main():
     args_list += [["read_data", data.filename]]
 
     lines = get_formatted_command_lines(args_list)
-    with open("system.in", "w") as f:
-        f.write(lines)
+    Path("system.in").write_text(lines)
 
 
 if __name__ == "__main__":

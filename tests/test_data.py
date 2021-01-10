@@ -12,7 +12,7 @@ class DataTest(unittest.TestCase):
     def test_read_and_write_to_file(self):
         """Read and rewrite a LAMMPS data file."""
         filepath = Path(__file__).parent.joinpath("data", "butane.data")
-        data = Data(filepath, atom_style="full")
+        data = Data(filepath)
         with tempfile.TemporaryDirectory() as testdir:
             # Create a directory to securely open a unique temporary file
             tempfilepath = Path(testdir).joinpath("test-butane.data")
