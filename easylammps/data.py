@@ -655,9 +655,13 @@ class Data(object):
             if line == "":
                 continue
 
-            keyword = line.split("#")[0].strip()
+            # Comment
+            comment = None
+            if "#" in line:
+                comment = line.split("#")[1].strip()
 
             # Section change
+            keyword = line.split("#")[0].strip()
             if (
                 keyword == "Masses"
                 or keyword == "Pair Coeffs"
@@ -674,6 +678,7 @@ class Data(object):
                 or keyword == "Impropers"
             ):
                 section = keyword
+                section_comment = comment
                 continue
 
             # Header
@@ -732,11 +737,6 @@ class Data(object):
                     ]
                     continue
 
-            # Comment
-            comment = None
-            if "#" in line:
-                comment = line.split("#")[1].strip()
-
             # Masses
             if section == "Masses":
                 i = int(line.split()[0])
@@ -759,6 +759,9 @@ class Data(object):
                         coeffs.append(coeff)
                     except ValueError:
                         style = c
+                # Style can be defined once in the section header
+                if style is None and section_comment is not None:
+                    style = section_comment
 
                 self.add_pair_type((i, i), coeffs=coeffs, style=style, comment=comment)
 
@@ -778,6 +781,9 @@ class Data(object):
                         coeffs.append(coeff)
                     except ValueError:
                         style = c
+                # Style can be defined once in the section header
+                if style is None and section_comment is not None:
+                    style = section_comment
 
                 self.add_pair_type((i, j), coeffs=coeffs, style=style, comment=comment)
 
@@ -796,6 +802,9 @@ class Data(object):
                         coeffs.append(coeff)
                     except ValueError:
                         style = c
+                # Style can be defined once in the section header
+                if style is None and section_comment is not None:
+                    style = section_comment
 
                 self.add_bond_type(i=i, coeffs=coeffs, style=style, comment=comment)
 
@@ -814,6 +823,9 @@ class Data(object):
                         coeffs.append(coeff)
                     except ValueError:
                         style = c
+                # Style can be defined once in the section header
+                if style is None and section_comment is not None:
+                    style = section_comment
 
                 self.add_angle_type(i=i, coeffs=coeffs, style=style, comment=comment)
 
@@ -837,6 +849,9 @@ class Data(object):
                             coeffs.append(coeff)
                         except ValueError:
                             style = c
+                # Style can be defined once in the section header
+                if style is None and section_comment is not None:
+                    style = section_comment
 
                 self.add_dihedral_type(i=i, coeffs=coeffs, style=style, comment=comment)
 
@@ -855,6 +870,9 @@ class Data(object):
                         coeffs.append(coeff)
                     except ValueError:
                         style = c
+                # Style can be defined once in the section header
+                if style is None and section_comment is not None:
+                    style = section_comment
 
                 self.add_improper_type(i=i, coeffs=coeffs, style=style, comment=comment)
 
