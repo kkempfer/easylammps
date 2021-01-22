@@ -13,8 +13,8 @@ class DataTest(unittest.TestCase):
         """Read and rewrite a LAMMPS data file."""
         filepath = Path(__file__).parent.joinpath("data", "butane.data")
         data = Data(filepath)
+        # Create a directory to securely open a unique temporary file inside
         with tempfile.TemporaryDirectory() as testdir:
-            # Create a directory to securely open a unique temporary file
             tempfilepath = Path(testdir).joinpath("test-butane.data")
             data.write_to_file(tempfilepath, write_coeffs=True)
             content = tempfilepath.read_text()

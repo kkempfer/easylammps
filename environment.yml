@@ -1,6 +1,4 @@
 name: easylammps
-channels:
-  - conda-forge
 dependencies:
   - networkx
   - numpy

@@ -25,7 +25,7 @@ Install `easylammps` and its dependencies:
 Required:
 
 * [networkx](https://networkx.org/) Data structures for graphs and graph algorithms
-* [numpy](https://numpy.org/) Scientific computing
+* [numpy](https://numpy.org/) N-dimensional array
 * [pandas](https://pandas.pydata.org/) Labeled data analysis
 
 Recommended:
