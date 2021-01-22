@@ -5,16 +5,16 @@ A user-friendly Python package to manipulate input and output files of Large-sca
 
 ## Installation
 
-Create and activate a virtual Python environment (recommended) with the name `lammps`, for example using [Anaconda](https://anaconda.org/) package and environment manager:
+Create and activate a virtual Python environment (recommended) with the name `easylammps`, for example using [Anaconda](https://anaconda.org/) package and environment manager :
 
-    conda create --name lammps
-    conda activate lammps
+    conda create --name easylammps
+    conda activate easylammps
 
-Clone this repository:
+Clone this repository :
 
     git clone https://github.com/kkempfer/easylammps.git
 
-Install `easylammps` and its dependencies:
+Install `easylammps` and its dependencies :
 
     cd easylammps
     pip install .
@@ -22,33 +22,33 @@ Install `easylammps` and its dependencies:
 
 ## Dependencies
 
-Required:
+Required :
 
 * [networkx](https://networkx.org/) Data structures for graphs and graph algorithms
 * [numpy](https://numpy.org/) N-dimensional array
 * [pandas](https://pandas.pydata.org/) Labeled data analysis
 
-Recommended:
+Recommended :
 
 * [matplotlib](https://matplotlib.org/) Visualization
 
 
 ## Build the documentation (optional)
 
-Enter to the documentation directory:
+Enter to the documentation directory :
 
     cd docs
 
-Create and activate the virtual Python environment `easylammps_docs` based on the `environment.yml` file:
+Create and activate the virtual Python environment `easylammps_docs` based on the `environment.yml` file :
 
     conda env create -f environment.yml
     conda activate easylammps_docs
 
-Make the documentation using [`sphinx`](https://www.sphinx-doc.org/):
+Make the documentation using [`sphinx`](https://www.sphinx-doc.org/) :
 
     make html
 
-Deactivate your virtual Python environment:
+Deactivate your virtual Python environment :
 
     conda deactivate
 
@@ -59,18 +59,18 @@ Access the documentation in the build/html directory.
 
 Coupling [Python with LAMMPS]([https://lammps.sandia.gov/doc/Python_head.html) opens the door to many advanced extensions. Fortunately, the `lammps` Python library already wraps the [LAMMPS C-library interface](https://lammps.sandia.gov/doc/Python_module.html). Here, we propose a quick installation guide.
 
-Clone the official LAMMPS repository (stable release):
+Clone the official LAMMPS repository (stable release) :
 
     git clone https://github.com/lammps/lammps.git
     cd lammps
     git checkout stable
     git pull
 
-Use the virtual Python environment where `easylammps` is installed (recommended):
+Use the virtual Python environment where `easylammps` is installed (recommended) :
 
-    conda activate lammps
+    conda activate easylammps
 
-Prepare the building directory and run `cmake` with at least these options (replace pythonX.Y by your python version):
+Prepare the building directory and run `cmake` with at least these options (replace pythonX.Y by your python version) :
 
     mkdir build-python
     cd build-python
@@ -83,21 +83,21 @@ Prepare the building directory and run `cmake` with at least these options (repl
           -D PYTHON_LIBRARY=$CONDA_PREFIX/lib/libpythonX.Y.so \
           ../cmake
 
-More options to add in `cmake` are available [here](https://lammps.sandia.gov/doc/Build.html). Among them, some useful ones are presented here:
+More options to add in `cmake` are available [here](https://lammps.sandia.gov/doc/Build.html). Among them, some useful ones are presented here :
 
           -D LAMMPS_MACHINE=python # Suffix to append to lmp binary
           -D PKG_MOLECULE=ON # Model molecular systems with fixed covalent bonds
           -D PKG_RIGID=ON    # Rigid constraints on collections of atoms or particles
           -D PKG_KSPACE=ON   # Long-range electrostatic interaction
 
-Once ready, build and install LAMMPS as a shared library with Python:
+Once ready, build and install LAMMPS as a shared library with Python :
 
     make
     make install
 
-Finally, we need to add the library path which contains the installed `liblammps.so` to LD_LIBRARY_PATH, but only when our virtual Python environment `lammps` is active. Anaconda provides a way to [manage environment variables](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#saving-environment-variables). On Linux, the procedure is described below.
+Finally, we need to add the library path which contains the installed `liblammps.so` to LD_LIBRARY_PATH, but only when our virtual Python environment `easylammps` is active. Anaconda provides a way to [manage environment variables](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#saving-environment-variables). The procedure is given below.
 
-Enter to the conda environment directory and create these subdirectories and files:
+Enter to the conda environment directory and create these subdirectories and files :
 
     cd $CONDA_PREFIX
     mkdir -p ./etc/conda/activate.d
@@ -105,13 +105,13 @@ Enter to the conda environment directory and create these subdirectories and fil
     touch ./etc/conda/activate.d/env_vars.sh
     touch ./etc/conda/deactivate.d/env_vars.sh
 
-Edit `./etc/conda/activate.d/env_vars.sh` as follows:
+Edit `./etc/conda/activate.d/env_vars.sh` as follows :
 
     #!/bin/sh
 
     export LD_LIBRARY_PATH="$CONDA_PREFIX/lib:$LD_LIBRARY_PATH"
 
-Edit `./etc/conda/deactivate.d/env_vars.sh` as follows:
+Edit `./etc/conda/deactivate.d/env_vars.sh` as follows :
 
     #!/bin/sh
 
@@ -125,19 +125,19 @@ Edit `./etc/conda/deactivate.d/env_vars.sh` as follows:
     LD_LIBRARY_PATH=${LD_LIBRARY_PATH#:}
     LD_LIBRARY_PATH=${LD_LIBRARY_PATH%:}
 
-You should now be able to run LAMMPS from the command line and to import `lammps` module within Python:
+You should now be able to run LAMMPS from the command line and to import `lammps` module within Python :
 
     lmp_python
     python -c "import lammps"
 
-Do not forget to deactivate your virtual Python environment when you are done working:
+Do not forget to deactivate your virtual Python environment when you are done working :
 
     conda deactivate
 
 ---
 **NOTE**
 
-For now, installing LAMMPS as a shared library with Python is not mandatory to use the `easylammps` package. In future, we may add some functionalities using the `lammps` Python library, such as easy access to LAMMPS binary restart files.
+For now, installing LAMMPS as a shared library with Python is not mandatory to use the `easylammps` package. In future, we may add some functionalities using the `lammps` Python library.
 
 ---
 
