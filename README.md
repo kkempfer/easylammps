@@ -39,10 +39,10 @@ Enter to the documentation directory :
 
     cd docs
 
-Create and activate the virtual Python environment `easylammps_docs` based on the `environment.yml` file :
+Create and activate the virtual Python environment `easylammps-dev` based on the `environment-dev.yml` file :
 
-    conda env create -f environment.yml
-    conda activate easylammps_docs
+    conda env create -f environment-dev.yml
+    conda activate easylammps-dev
 
 Make the documentation using [`sphinx`](https://www.sphinx-doc.org/) :
 
@@ -52,7 +52,7 @@ Deactivate your virtual Python environment :
 
     conda deactivate
 
-Access the documentation in the build/html directory.
+Access the documentation in the `easylammps/docs/build/html` directory.
 
 
 ## Install LAMMPS as a shared library with Python (optional)
