@@ -897,6 +897,11 @@ class Data(object):
 
                 try:
                     atom_type = self.atom_types[atom_type_i - 1]
+                    if atom_type is None:
+                        # Masses not available, create empty type
+                        # Atom type comment taken from atom
+                        self.add_atom_type(i=atom_type_i, comment=comment)
+                        atom_type = self.atom_types[atom_type_i - 1]
                 except IndexError:
                     # Masses not available, create empty type
                     # Atom type comment taken from atom
@@ -936,6 +941,11 @@ class Data(object):
 
                 try:
                     bond_type = self.bond_types[bond_type_i - 1]
+                    if bond_type is None:
+                        # Coeffs not available, create empty type
+                        # Bond type comment taken from bond
+                        self.add_bond_type(i=bond_type_i, comment=comment)
+                        bond_type = self.bond_types[bond_type_i - 1]
                 except IndexError:
                     # Coeffs not available, create empty type
                     # Bond type comment taken from bond
@@ -959,6 +969,11 @@ class Data(object):
 
                 try:
                     angle_type = self.angle_types[angle_type_i - 1]
+                    if angle_type is None:
+                        # Coeffs not available, create empty type
+                        # Angle type comment taken from angle
+                        self.add_angle_type(i=angle_type_i, comment=comment)
+                        angle_type = self.angle_types[angle_type_i - 1]
                 except IndexError:
                     # Coeffs not available, create empty type
                     # Angle type comment taken from angle
@@ -983,6 +998,11 @@ class Data(object):
 
                 try:
                     dihedral_type = self.dihedral_types[dihedral_type_i - 1]
+                    if dihedral_type is None:
+                        # Coeffs not available, create empty type
+                        # Dihedral type comment taken from dihedral
+                        self.add_dihedral_type(i=dihedral_type_i, comment=comment)
+                        dihedral_type = self.dihedral_types[dihedral_type_i - 1]
                 except IndexError:
                     # Coeffs not available, create empty type
                     # Dihedral type comment taken from dihedral
@@ -1007,6 +1027,11 @@ class Data(object):
 
                 try:
                     improper_type = self.improper_types[improper_type_i - 1]
+                    if improper_type is None:
+                        # Coeffs not available, create empty type
+                        # Improper type comment taken from improper
+                        self.add_improper_type(i=improper_type_i, comment=comment)
+                        improper_type = self.improper_types[improper_type_i - 1]
                 except IndexError:
                     # Coeffs not available, create empty type
                     # Improper type comment taken from improper
