@@ -1,9 +1,21 @@
 """Python library to manage LAMMPS Dump file."""
 
+import logging
 import io
 import gzip
 import itertools
 import pandas as pd
+
+
+# Rename LAMMPS Data atoms keys for consistency with Dump format
+DatatoDump = {
+    "i": "id",
+    "mol_i": "mol",
+    "atom_type_i": "type",
+    "atom_type_mass": "mass",
+    "charge": "q",
+    "comment": "element",
+}
 
 
 class Dump(object):
@@ -77,10 +89,24 @@ class Dump(object):
         self.sort = sort
         self.data = data
 
+        self._datoms = None
         if self.data is not None:
-            raise NotImplementedError(
-                "LAMMPS Data information not added to LAMMPS Dump"
-            )
+            if self.pandas:
+                self._datoms = pd.DataFrame(data.atoms)
+                # Expand atom type
+                self._datoms = self._datoms.join(
+                    pd.DataFrame(self._datoms.pop("atom_type").tolist()).add_prefix(
+                        "atom_type_"
+                    )
+                )
+                # Keep useful information
+                self._datoms = self._datoms[
+                    self._datoms.columns.intersection(DatatoDump.keys())
+                ].rename(columns=DatatoDump)
+            else:
+                raise NotImplementedError(
+                    "LAMMPS Data information not added to LAMMPS Dump"
+                )
 
     def __del__(self):
         try:
@@ -160,17 +186,17 @@ class Dump(object):
         lines = itertools.islice(self.f, conf["nb_atoms"])
         lines = list(lines)
         if self.raw:
-            conf["raw"] = (conf["fields"], lines, self.pandas, self.sort)
+            conf["raw"] = (conf["fields"], lines, self.pandas, self.sort, self._datoms)
             conf["atoms"] = None
         else:
             conf["atoms"] = Dump.raw2atoms(
-                conf["fields"], lines, self.pandas, self.sort
+                conf["fields"], lines, self.pandas, self.sort, self._datoms
             )
 
         return conf
 
     @staticmethod
-    def raw2atoms(fields, lines, pandas, sort):
+    def raw2atoms(fields, lines, pandas, sort, datoms=None):
         """
         Transform raw information into atoms.
 
@@ -203,6 +229,21 @@ class Dump(object):
                 if "id" not in fields:
                     raise KeyError("Cannot sort atoms, id field not found in fields")
                 atoms.sort_values("id", inplace=True)
+            if datoms is not None:
+                columns = atoms.columns.intersection(datoms.columns)
+                if not (
+                    pd.concat([atoms[columns], datoms[columns]])
+                    .drop_duplicates(keep=False)
+                    .empty
+                ):
+                    logging.warning(
+                        "No common columns to perform merge on. Assume Data and Dump are sorted in the same way."
+                    )
+                    atoms = atoms.merge(
+                        datoms, how="left", left_index=True, right_index=True
+                    )
+                else:
+                    atoms = atoms.merge(datoms, how="left")
 
         # Atoms is a list of dictionnaries
         else:
@@ -224,5 +265,9 @@ class Dump(object):
                 if "id" not in fields:
                     raise KeyError("Cannot sort atoms, id field not found in fields")
                 atoms.sort(key=lambda atom: atom["id"])
+            if datoms is not None:
+                raise NotImplementedError(
+                    "LAMMPS Data information not added to LAMMPS Dump"
+                )
 
         return atoms
