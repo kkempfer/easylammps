@@ -1,11 +1,11 @@
 """Python library to manage LAMMPS Data object."""
 
-import logging
 import itertools
+import logging
+
 import networkx as nx
 
-
-supported_atom_styles = ["full", "pqeq", "molecular"]
+supported_atom_styles = ["full", "molecular", "charge"]
 
 
 def write_comment(f, d):
@@ -878,22 +878,15 @@ class Data(object):
 
             # Atoms
             if section == "Atoms":
-                i = int(line.split()[0])
-                mol_i = int(line.split()[1])
-                atom_type_i = int(line.split()[2])
-                if self.atom_style == "full" or self.atom_style == "pqeq":
-                    charge = float(line.split()[3])
-                x = float(line.split()[4])
-                y = float(line.split()[5])
-                z = float(line.split()[6])
-                try:
-                    nx = int(line.split()[7])
-                    ny = int(line.split()[8])
-                    nz = int(line.split()[9])
-                except (IndexError, ValueError):
-                    nx = None
-                    ny = None
-                    nz = None
+                if self.atom_style == "full":
+                    # full = atom-ID molecule-ID atom-type q x y z
+                    atom_type_i = int(line.split()[2])
+                elif self.atom_style == "molecular":
+                    # molecular = atom-ID molecule-ID atom-type q x y z
+                    atom_type_i = int(line.split()[2])
+                elif self.atom_style == "charge":
+                    # charge = atom-ID atom-type q x y z
+                    atom_type_i = int(line.split()[1])
 
                 try:
                     atom_type = self.atom_types[atom_type_i - 1]
@@ -908,19 +901,73 @@ class Data(object):
                     self.add_atom_type(i=atom_type_i, comment=comment)
                     atom_type = self.atom_types[atom_type_i - 1]
 
-                self.add_atom(
-                    i=i,
-                    mol_i=mol_i,
-                    atom_type=atom_type,
-                    charge=charge,
-                    x=x,
-                    y=y,
-                    z=z,
-                    nx=nx,
-                    ny=ny,
-                    nz=nz,
-                    comment=comment,
-                )
+                if self.atom_style == "full":
+                    # full = atom-ID molecule-ID atom-type q x y z
+                    try:
+                        nx = int(line.split()[7])
+                        ny = int(line.split()[8])
+                        nz = int(line.split()[9])
+                    except (IndexError, ValueError):
+                        nx = None
+                        ny = None
+                        nz = None
+                    self.add_atom(
+                        i=int(line.split()[0]),
+                        mol_i=int(line.split()[1]),
+                        atom_type=atom_type,
+                        charge=float(line.split()[3]),
+                        x=float(line.split()[4]),
+                        y=float(line.split()[5]),
+                        z=float(line.split()[6]),
+                        nx=nx,
+                        ny=ny,
+                        nz=nz,
+                        comment=comment,
+                    )
+                elif self.atom_style == "molecular":
+                    # molecular = atom-ID molecule-ID atom-type x y z
+                    try:
+                        nx = int(line.split()[6])
+                        ny = int(line.split()[7])
+                        nz = int(line.split()[8])
+                    except (IndexError, ValueError):
+                        nx = None
+                        ny = None
+                        nz = None
+                    self.add_atom(
+                        i=int(line.split()[0]),
+                        mol_i=int(line.split()[1]),
+                        atom_type=atom_type,
+                        x=float(line.split()[3]),
+                        y=float(line.split()[4]),
+                        z=float(line.split()[5]),
+                        nx=nx,
+                        ny=ny,
+                        nz=nz,
+                        comment=comment,
+                    )
+                elif self.atom_style == "charge":
+                    # charge = atom-ID atom-type q x y z
+                    try:
+                        nx = int(line.split()[6])
+                        ny = int(line.split()[7])
+                        nz = int(line.split()[8])
+                    except (IndexError, ValueError):
+                        nx = None
+                        ny = None
+                        nz = None
+                    self.add_atom(
+                        i=int(line.split()[0]),
+                        atom_type=atom_type,
+                        charge=float(line.split()[2]),
+                        x=float(line.split()[3]),
+                        y=float(line.split()[4]),
+                        z=float(line.split()[5]),
+                        nx=nx,
+                        ny=ny,
+                        nz=nz,
+                        comment=comment,
+                    )
 
             # Velocities
             if section == "Velocities":
@@ -943,7 +990,7 @@ class Data(object):
                     bond_type = self.bond_types[bond_type_i - 1]
                     if bond_type is None:
                         # Coeffs not available, create empty type
-                        # Bond type comment taken from bond
+                        # Bond type comment takeBondsn from bond
                         self.add_bond_type(i=bond_type_i, comment=comment)
                         bond_type = self.bond_types[bond_type_i - 1]
                 except IndexError:
@@ -1587,12 +1634,14 @@ class Data(object):
         if self.atoms != []:
             f.write("Atoms # {:s}\n\n".format(self.atom_style))
             for atom in self.atoms:
-                f.write(
-                    "{:7d} {:7d} {:7d}".format(
-                        atom["i"], atom["mol_i"], atom["atom_type"]["i"]
-                    )
-                )
-                if self.atom_style == "full" or self.atom_style == "pqeq":
+                # full = atom-ID molecule-ID atom-type q x y z
+                # molecular = atom-ID molecule-ID atom-type q x y z
+                # charge = atom-ID atom-type q x y z
+                f.write("{:7d}".format(atom["i"]))
+                if self.atom_style == "full" or self.atom_style == "molecular":
+                    f.write(" {:7d}".format(atom["mol_i"]))
+                f.write(" {:7d}".format(atom["atom_type"]["i"]))
+                if self.atom_style == "full" or self.atom_style == "charge":
                     f.write(" {:9.6f}".format(atom["charge"]))
                 f.write(
                     " {:13.6e} {:13.6e} {:13.6e}".format(
